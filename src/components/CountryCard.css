@@ -1,0 +1,40 @@
+.countryCard {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 4rem;
+    justify-content: start;
+}
+
+.card {
+    border-radius: var(--border-radius);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background-color: white;
+}
+.card img {
+    width: 100%;
+    height: 200px;
+    object-fit: fill;
+    display: block;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+}
+
+.cardContent {
+    padding: 16px;
+}
+
+.cardContent h2 {
+    margin: 0 0 8px;
+    font-size: 1.25rem;
+}
+
+.cardContent p {
+    margin: 4px 0;
+    color: #555;
+}
+
+@media (max-width: 600px) {
+    .countryCard {
+        grid-template-columns: repeat(auto-fit, minmax(100%, 1fr));
+    }
+}
