@@ -13,7 +13,6 @@ function CountryCard({ countries }) {
                     key={country.name.common}
                     className="card"
                     onClick={() => navigate(`/pages/country/${encodeURIComponent(country.name.common)}`)}
-                    style={{ cursor: "pointer" }}
                 >
                     
                     <img src={country.flags.png} alt={`${country.name.common} flag`} className="flag" />
