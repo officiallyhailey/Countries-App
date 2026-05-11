@@ -48,11 +48,7 @@ function DetailCard({ country, allCountries }) {
 
             <div className="detailContainer">
                 <div className="detailLeft">
-                    <img
-                        src={country.flags.png}
-                        alt={country.flags.alt || `${country.name.common} flag`}
-                        className="detailFlag"
-                    />
+                       <img src={country.flags.png} alt={`${country.name.common} flag`} className="detailFlag" onError={(e) => { e.target.src = country.flags.svg; }} />
                 </div>
 
                 <div className="detailRight">
