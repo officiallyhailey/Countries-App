@@ -31,7 +31,7 @@ function SavedCountries() {
                 <CountryCard countries={savedCountries} />
             )}
 
-            {/* ---- Profile Section ---- */}
+            {/*  Profile Section */}
             <h2 className="profile-heading">
                 {profile.name ? `Welcome back, ${profile.name}!` : "My Profile"}
             </h2>
