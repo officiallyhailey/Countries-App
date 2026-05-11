@@ -15,7 +15,7 @@ function CountryCard({ countries }) {
                     onClick={() => navigate(`/pages/country/${encodeURIComponent(country.name.common)}`)}
                 >
                     
-                    <img src={country.flags.png} alt={`${country.name.common} flag`} className="flag" />
+                    <img src={country.flags.png} alt={`${country.name.common} flag`} className="flag" onError={(e) => { e.target.src = country.flags.svg; }} />
                     <div className="cardContent">
                     <h2>{country.name.common}</h2>
                     <p><strong>Population:</strong> {country.population.toLocaleString()}</p>

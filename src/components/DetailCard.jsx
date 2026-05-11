@@ -22,7 +22,7 @@ function DetailCard({ country, allCountries }) {
         setSearchCount(updated);
     }, [country.name.common]);
 
-    
+    // Handle save/unsave country
     const handleSave = () => {
         // Toggle save state in localStorage
         const key = "savedCountries";

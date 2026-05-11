@@ -7,7 +7,6 @@ function CountryDetail() {
     const { name } = useParams();
     const country = data.find((c) => c.name.common === decodeURIComponent(name));
 
-
     return (
         <div className="mainContainer">
             <DetailCard country={country} allCountries={data} />
