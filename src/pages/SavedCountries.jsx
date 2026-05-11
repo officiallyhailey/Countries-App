@@ -11,14 +11,8 @@ function SavedCountries() {
             <h1>Welcome back, {name}!</h1>
             <p> My Profile</p>
 
-            {/* TODO: add user profile form here 
-            Form:
-            - Name
-            - Email
-            - Country
-            - Bio
-
-            Submit button
+            {/* TODO: add profile form component 
+     show saved data
             */}
 
         </div>
