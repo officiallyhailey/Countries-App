@@ -3,16 +3,21 @@ import CountryCards from "../components/CountryCard";
 import { useState, useMemo } from 'react';
 import "./Home.css";
 
-const ALL_REGIONS = "Filter by Region";
+const allRegions = "Filter by Region";
 
 function Home() {
+
+    // Initialize the countries state with the data from localData.js
     const [countries, setCountries] = useState(data);
+
+    // Use useMemo to compute the unique regions from the data, ensuring it only recomputes when the data changes
     
     const regions = useMemo(() => {
         const uniqueRegions = new Set(data.map((country) => country.region));
         return Array.from(uniqueRegions);
     }, []);
 
+    // Handler for the search input, filters countries based on the search term
     const handleSearch = (event) => {
         const searchTerm = event.target.value.toLowerCase();
         const filteredCountries = data.filter((country) =>
@@ -20,10 +25,10 @@ function Home() {
         );
         setCountries(filteredCountries);
     };
-
+// Handler for the region select dropdown, filters countries based on the selected region
     const handleRegionChange = (event) => {
         const selectedRegion = event.target.value;
-        const filteredCountries = selectedRegion === ALL_REGIONS
+        const filteredCountries = selectedRegion === allRegions
             ? data
             : data.filter((country) => country.region === selectedRegion);
         setCountries(filteredCountries);
@@ -31,6 +36,7 @@ function Home() {
 
 
     return (
+        // Render the search bar, region filter, and the country cards
         <div className="home">
             <div className="filter">
                 <div className="searchBar">
@@ -39,9 +45,9 @@ function Home() {
                 </div>
                 <div className="filters">
                     <select onChange={handleRegionChange}>
-                        <option value={ALL_REGIONS}>{ALL_REGIONS}</option>
+                        <option value={allRegions}>{allRegions}</option>
                         {regions.map((region) => (
-                            <option key={region.value} value={region}>{region}</option>
+                            <option key={region} value={region}>{region}</option>
                         ))}
                     </select>
                 </div>
