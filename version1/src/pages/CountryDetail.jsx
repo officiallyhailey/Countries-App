@@ -6,7 +6,9 @@ import "./CountryDetail.css";
 function CountryDetail({ countries }) {
     const { name } = useParams();
     const allCountries = countries;
-    const country = allCountries.find((c) => c.name.common === decodeURIComponent(name));
+    const country = allCountries.find(
+        (c) => c.name.common === decodeURIComponent(name),
+    );
 
     if (!country) return <p>Country not found.</p>;
 

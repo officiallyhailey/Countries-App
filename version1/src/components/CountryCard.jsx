@@ -5,28 +5,44 @@ import "./CountryCard.css";
 
 function CountryCard({ countries }) {
     const navigate = useNavigate();
-    const sortedCountries = [...countries].sort((a, b) => a.name.common.localeCompare(b.name.common));
+    const sortedCountries = [...countries].sort((a, b) =>
+        a.name.common.localeCompare(b.name.common),
+    );
 
     return (
         <div className="countryCard">
             {sortedCountries.map((country) => (
                 <div
-                    key={country.name.common}
                     className="card"
+                    key={country.name.common}
                     onClick={() => {
                         const countKey = `searchCount_${country.name.common}`;
                         const current = parseInt(localStorage.getItem(countKey) || "0", 10);
                         localStorage.setItem(countKey, String(current + 1));
-                        navigate(`/pages/country/${encodeURIComponent(country.name.common)}`);
+                        navigate(
+                            `/pages/country/${encodeURIComponent(country.name.common)}`,
+                        );
                     }}
                 >
-                    
-                    <img src={country.flags.png} alt={`${country.name.common} flag`} className="flag" onError={(event) => { event.target.src = country.flags.svg; }} />
+                    <img
+                        src={country.flags.png}
+                        alt={`${country.name.common} flag`}
+                        className="flag"
+                        onError={(event) => {
+                            event.target.src = country.flags.svg;
+                        }}
+                    />
                     <div className="cardContent">
-                    <h2>{country.name.common}</h2>
-                    <p><strong>Population:</strong> {country.population.toLocaleString()}</p>
-                    <p><strong>Region:</strong> {country.region}</p>
-                    <p><strong>Capital:</strong> {country.capital}</p>
+                        <h2>{country.name.common}</h2>
+                        <p>
+                            <strong>Population:</strong> {country.population.toLocaleString()}
+                        </p>
+                        <p>
+                            <strong>Region:</strong> {country.region}
+                        </p>
+                        <p>
+                            <strong>Capital:</strong> {country.capital}
+                        </p>
                     </div>
                 </div>
             ))}

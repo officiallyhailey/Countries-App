@@ -31,7 +31,7 @@ function DetailCard({ country, allCountries }) {
     };
 
     const borderCountries = (country.borders || [])
-    // Map border country codes to their full country objects, filter out any that aren't found, and limit to 3 for display
+        // Map border country codes to their full country objects, filter out any that aren't found, and limit to 3 for display
         .map((cca3) => allCountries.find((c) => c.cca3 === cca3))
         .filter(Boolean)
         .slice(0, 3);
@@ -54,7 +54,7 @@ function DetailCard({ country, allCountries }) {
                         <div className="details">
                             <p><strong>Population:</strong> {country.population.toLocaleString()}</p>
                             <p><strong>Region:</strong> {country.region}</p>
-                            <p><strong>Capital:</strong> {country.capital?.join(", ") || "N/A"}</p>
+                            <p><strong>Capital:</strong> {country.capital}</p>
                             <p><strong>Searched:</strong> {searchCount} {searchCount === 1 ? "time" : "times"}</p>
                         </div>
                     </div>
