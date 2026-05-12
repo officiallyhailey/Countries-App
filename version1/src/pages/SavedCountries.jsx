@@ -1,9 +1,10 @@
-import data from "/localData.js";
 import CountryCard from "../components/CountryCard";
 import ProfileForm from "../components/ProfileForm";
 import "./SavedCountries.css";
 
-function SavedCountries() {
+function SavedCountries({ countries }) {
+    const allCountries = countries;
+
     // Read the array of saved country names from localStorage
     const savedNames = JSON.parse(localStorage.getItem("savedCountries") || "[]");
 
@@ -11,14 +12,14 @@ function SavedCountries() {
     const profile = JSON.parse(localStorage.getItem("userProfile") || "{}");
 
     // Filter the full country list down to only the ones the user saved
-    const savedCountries = data.filter((country) =>
+    const savedCountries = allCountries.filter((country) =>
         savedNames.includes(country.name.common)
     );
 
     return (
         <div className="saved-countries">
 
-            {/* ---- Saved Countries Section ---- */}
+
             <h1>My Saved Countries</h1>
 
             {savedCountries.length === 0 ? (

@@ -50,21 +50,21 @@
     color: var(--text-primary);
 }
 
-.infoGrid {
+.detailContent {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 0.5rem 2rem;
     margin-bottom: 2rem;
 }
 
-.infoCol p {
+.details p {
     color: var(--text-secondary);
     margin: 6px 0;
     font-size: 0.9rem;
     transition: color 0.3s ease;
 }
 
-.infoCol p strong {
+.details p strong {
     color: var(--text-primary);
     font-weight: 600;
     transition: color 0.3s ease;
@@ -139,7 +139,7 @@
         width: 100%;
     }
 
-    .infoGrid {
+    .detailContent {
         grid-template-columns: 1fr;
     }
 

@@ -14,17 +14,13 @@ function DetailCard({ country, allCountries }) {
         const saved = JSON.parse(localStorage.getItem(savedKey) || "[]");
         setIsSaved(saved.includes(country.name.common));
 
-        // Track search count for this country
+        // Get the search count for this country from localStorage
         const countKey = `searchCount_${country.name.common}`;
-        const current = parseInt(localStorage.getItem(countKey) || "0", 10);
-        const updated = current + 1;
-        localStorage.setItem(countKey, updated);
-        setSearchCount(updated);
+        setSearchCount(parseInt(localStorage.getItem(countKey) || "0", 10));
     }, [country.name.common]);
 
     // Handle save/unsave country
     const handleSave = () => {
-        // Toggle save state in localStorage
         const key = "savedCountries";
         const saved = JSON.parse(localStorage.getItem(key) || "[]");
         const updated = isSaved
@@ -54,8 +50,8 @@ function DetailCard({ country, allCountries }) {
                 <div className="detailRight">
                     <h2>{country.name.common}</h2>
 
-                    <div className="infoGrid">
-                        <div className="infoCol">
+                    <div className="detailContent">
+                        <div className="details">
                             <p><strong>Population:</strong> {country.population.toLocaleString()}</p>
                             <p><strong>Region:</strong> {country.region}</p>
                             <p><strong>Capital:</strong> {country.capital?.join(", ") || "N/A"}</p>
