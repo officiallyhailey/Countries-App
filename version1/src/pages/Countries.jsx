@@ -1,6 +1,8 @@
 import { useState, useMemo } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSearch, faChevronDown } from '@fortawesome/free-solid-svg-icons';
 import CountryCards from "../components/CountryCard";
-import "./Home.css";
+import "./countries.css";
 
 const allRegions = "Filter by Region";
 
@@ -34,15 +36,19 @@ function Home({ countries }) {
             <div className="home">
                 <div className="filter">
                     <div className="searchBar">
+                        <FontAwesomeIcon icon={faSearch} className="searchIcon" />
                         <input type="text" placeholder="Search for a country..." onChange={handleSearch} />
                     </div>
                     <div className="filters">
-                        <select value={selectedRegion} onChange={handleRegionChange}>
-                            <option value={allRegions}>{allRegions}</option>
-                            {regions.map((region) => (
-                                <option key={region} value={region}>{region}</option>
-                            ))}
-                        </select>
+                        <div className="selectWrapper">
+                            <select value={selectedRegion} onChange={handleRegionChange}>
+                                <option value={allRegions}>{allRegions}</option>
+                                {regions.map((region) => (
+                                    <option key={region} value={region}>{region}</option>
+                                ))}
+                            </select>
+                            <FontAwesomeIcon icon={faChevronDown} className="selectIcon" />
+                        </div>
                     </div>
                 </div>
                 <CountryCards countries={filteredCountries} />

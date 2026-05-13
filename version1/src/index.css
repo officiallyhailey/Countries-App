@@ -1,5 +1,5 @@
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: 'Nunito Sans', system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
   -ms-overflow-style: none;
@@ -7,15 +7,15 @@
   color-scheme: light;
 
   --border-radius: 7px;
-  --bg-body: #eef2f9;
+  --bg-body: #fafafa;
   --navbar-bg: rgba(255, 255, 255, 0.82);
   --navbar-shadow: 0 1px 20px rgba(100, 120, 160, 0.12);
   --card-bg: rgba(255, 255, 255, 0.75);
   --card-shadow: 0 4px 20px rgba(100, 120, 160, 0.12);
-  --text-primary: #1a1a2e;
-  --text-secondary: #5a6275;
+  --text-primary: #111517;
+  --text-secondary: #111517;
   --input-bg: rgba(255, 255, 255, 0.85);
-  --input-border: rgba(180, 195, 220, 0.7);
+  --input-border: #858585;
   --input-color: #888;
   --toggle-color: #555;
 }
