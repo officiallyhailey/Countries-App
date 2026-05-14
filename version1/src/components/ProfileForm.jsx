@@ -15,7 +15,7 @@ function ProfileForm() {
     const [saved_, setSaved] = useState(false);
 
     const handleSubmit = (e) => {
-        e.preventDefault(); // stop the page from refreshing
+        e.preventDefault(); // stop the page from refreshing!
 
         // Save all fields to localStorage as one object
         localStorage.setItem(

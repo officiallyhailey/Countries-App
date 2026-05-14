@@ -6,7 +6,6 @@ import SavedCountries from "./pages/SavedCountries";
 import CountryDetail from "./pages/CountryDetail";
 import "./App.css";
 import data from "/localData.js";
-//Set up routing for the application, including a default route that redirects to the home page
 
 const API = "https://restcountries.com/v3.1/all?fields=name,flags,population,region,capital,cca3,borders";
 

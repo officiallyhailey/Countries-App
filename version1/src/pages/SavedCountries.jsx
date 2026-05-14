@@ -32,12 +32,12 @@ function SavedCountries({ countries }) {
                 <CountryCard countries={savedCountries} />
             )}
 
-            {/*  Profile Section */}
+           
             <h2 className="profile-heading">
                 {profile.name ? `Welcome back, ${profile.name}!` : "My Profile"}
             </h2>
 
-            {/* ProfileForm handles loading and saving profile data */}
+   
             <ProfileForm />
 
         </div>
