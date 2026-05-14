@@ -12,7 +12,7 @@
     box-shadow: var(--card-shadow);
     font-size: 0.95rem;
     margin-bottom: 2.5rem;
-    transition: background-color 0.2s ease, color 0.2s ease;
+    transition: background-color 0.1s ease, color 0.1s ease;
 }
 
 .backBtn:hover {
@@ -61,13 +61,13 @@
     color: var(--text-secondary);
     margin: 6px 0;
     font-size: 0.9rem;
-    transition: color 0.3s ease;
+    transition: color 0.1s ease;
 }
 
 .details p strong {
     color: var(--text-primary);
     font-weight: 600;
-    transition: color 0.3s ease;
+    transition: color 0.1s ease;
 }
 
 .borderCountries {
@@ -99,7 +99,7 @@
     cursor: pointer;
     font-size: 0.85rem;
     box-shadow: var(--card-shadow);
-    transition: background-color 0.2s ease;
+    transition: background-color 0.1s ease;
 }
 
 .borderBtn:hover {
@@ -117,7 +117,7 @@
     cursor: pointer;
     box-shadow: var(--card-shadow);
     font-size: 0.95rem;
-    transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+    transition: background-color 0.1s ease, color 0.1s ease, border-color 0.1s ease;
 }
 
 .saveBtn:hover {

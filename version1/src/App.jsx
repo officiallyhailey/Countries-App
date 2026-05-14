@@ -1,6 +1,7 @@
 import { Routes, Route } from "react-router-dom";
 import { useEffect, useState } from 'react';
 import Header from "./components/Header";
+
 import Home from "./pages/Countries";
 import SavedCountries from "./pages/SavedCountries";
 import CountryDetail from "./pages/CountryDetail";
@@ -10,7 +11,14 @@ import data from "/localData.js";
 const API = "https://restcountries.com/v3.1/all?fields=name,flags,population,region,capital,cca3,borders";
 
 function App() {
+
+  // State for the list of all countries, and whether dark mode is on
+  
   const [countries, setCountries] = useState([]);
+  const [isDarkMode, setIsDarkMode] = useState(false);
+  const toggleTheme = () => setIsDarkMode(prev => !prev);
+
+// Load the country data from the API, or fall back to local data if the fetch fails
 
   useEffect(() => {
     let cancelled = false;
@@ -26,13 +34,15 @@ function App() {
       }
     };
 
+// Call the function to load countries when the component boots
+
     getCountries();
     return () => { cancelled = true; };
   }, []);
 
   return (
-    <div className="App">
-      <Header />
+    <div className={`App ${isDarkMode ? 'darkTheme' : ''}`}>
+      <Header isDarkMode={isDarkMode} toggleTheme={toggleTheme} />
 
       <div className="mainContainer">
         <Routes>

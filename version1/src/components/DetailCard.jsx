@@ -38,13 +38,14 @@ function DetailCard({ country, allCountries }) {
 
     return (
         <div className="detailCard">
+         {/* Back button to return to the previous page */}
             <button className="backBtn" onClick={() => navigate(-1)}>
                 ← Back
             </button>
 
             <div className="detailContainer">
                 <div className="detailLeft">
-                    <img src={country.flags.png} alt={`${country.name.common} flag`} className="detailFlag" onError={(e) => { e.target.src = country.flags.svg; }} />
+                    <img src={country.flags.png} alt={`${country.name.common} flag`} className="detailFlag" onError={(event) => { event.target.src = country.flags.svg; }} />
                 </div>
 
                 <div className="detailRight">

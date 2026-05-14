@@ -1,12 +1,12 @@
 import { useNavigate } from "react-router-dom";
-import { useTheme } from "../theme/ThemeContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart, faSun, faMoon } from "@fortawesome/free-solid-svg-icons";
 import "./Header.css";
 
-function Header() {
+// The header component with the title, theme toggle, and link to saved countries
+
+function Header({ isDarkMode, toggleTheme }) {
     const nav = useNavigate();
-    const { theme, toggleTheme } = useTheme();
 
     const navigate = () => nav("pages/saved-countries");
     const navigateHome = () => nav("pages/home");
@@ -20,7 +20,7 @@ function Header() {
                     <FontAwesomeIcon icon={faHeart} />
                 </button>
                 <button className="theme-toggle" onClick={toggleTheme} aria-label="Toggle theme">
-                    {theme === 'light' ? <FontAwesomeIcon icon={faMoon} /> : <FontAwesomeIcon icon={faSun} />}
+                    {isDarkMode ? <FontAwesomeIcon icon={faSun} /> : <FontAwesomeIcon icon={faMoon} />}
                 </button>
             </div>
         </div>

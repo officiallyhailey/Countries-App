@@ -20,7 +20,8 @@
   --toggle-color: #555;
 }
 
-[data-theme="dark"] {
+
+.darkTheme {
   color-scheme: dark;
 
   --bg-body: #141414;
@@ -39,16 +40,26 @@
 body {
   margin: 0;
   padding: 0;
-  background-color: var(--bg-body);
-  transition: background-color 0.3s ease;
 }
 
 .mainContainer {
   padding: 1.5rem 3rem 3rem 3rem;
+  animation: pageEnter 0.35s ease both;
 }
 
 @media (max-width: 600px) {
   .mainContainer {
     padding: 1.5rem;
+  }
+}
+
+@keyframes pageEnter {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
   }
 }
