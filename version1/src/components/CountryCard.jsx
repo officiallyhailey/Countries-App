@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import "./CountryCard.css";
 
-// The CountryCard component takes  a list of countries as a prop and renders a card for each country, displaying its flag, name, population, region, and capital. The countries are sorted alphabetically by name before rendering.
+// The CountryCard component takes  a list of countries as a prop and renders a card for each country, displaying its flag (via the png or the svg if that fails), name, population, region, and capital. The countries are sorted alphabetically by name before rendering.
 
 function CountryCard({ countries }) {
     const navigate = useNavigate();

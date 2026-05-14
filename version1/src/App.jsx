@@ -30,7 +30,7 @@ function App() {
         if (!cancelled) setCountries(fetched);
       } catch {
         if (!cancelled) setCountries(data);
-        console.log("Failed to fetch from API, using local data instead.");
+        console.log("Failed to fetch from API, using local data instead");
       }
     };
 
