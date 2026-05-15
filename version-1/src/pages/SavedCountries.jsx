@@ -1,6 +1,5 @@
 import CountryCard from "../components/CountryCard";
 import ProfileForm from "../components/ProfileForm";
-import "./SavedCountries.css";
 import "/src/index.css";
 
 

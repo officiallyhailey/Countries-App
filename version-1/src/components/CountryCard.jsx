@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import "./CountryCard.css";
+import SaveCountry from "./SaveCountry";
 
 // The CountryCard component takes  a list of countries as a prop and renders a card for each country, displaying its flag (via the png or the svg if that fails), name, population, region, and capital. The countries are sorted alphabetically by name before rendering.
 
@@ -19,9 +20,6 @@ function CountryCard({ countries }) {
                         const countKey = `searchCount_${country.name.common}`;
                         const current = parseInt(localStorage.getItem(countKey) || "0", 10);
                         localStorage.setItem(countKey, String(current + 1));
-                        navigate(
-                            `/pages/country/${encodeURIComponent(country.name.common)}`,
-                        );
                     }}
                 >
                     <img
@@ -31,6 +29,8 @@ function CountryCard({ countries }) {
                         onError={(event) => {
                             event.target.src = country.flags.svg;
                         }}
+                        onClick={() => {navigate(
+                            `/pages/country/${encodeURIComponent(country.name.common)}`);}}
                     />
                     <div className="cardContent">
                         <h2>{country.name.common}</h2>
@@ -43,6 +43,7 @@ function CountryCard({ countries }) {
                         <p>
                             <strong>Capital:</strong> {country.capital}
                         </p>
+                        <SaveCountry country={country} />
                     </div>
                 </div>
             ))}

@@ -34,7 +34,6 @@ function Home({ countries }) {
             setSelectedRegion(event.target.value);
         };
 
-        
         return (
             <div className="home">
                 <div className="filter">

@@ -110,7 +110,7 @@
     -webkit-appearance: none;
     appearance: none;
     align-self: flex-start;
-    width: 150px;
+    width: 120px;
     background: var(--card-bg);
     color: var(--text-primary);
     border: 1px solid var(--input-border);
@@ -128,7 +128,6 @@
 }
 
 .saveBtn.saved {
-    color: purple;
     border-color: purple;
 }
 

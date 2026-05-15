@@ -1,34 +1,20 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "./DetailCard.css";
+import SaveCountry from "./SaveCountry";
 
 function DetailCard({ country, allCountries }) {
     const navigate = useNavigate();
-    const [isSaved, setIsSaved] = useState(false);
+   
     const [searchCount, setSearchCount] = useState(0);
 
 
     useEffect(() => {
-        // Check if the country is saved in localStorage
-        const savedKey = "savedCountries";
-        const saved = JSON.parse(localStorage.getItem(savedKey) || "[]");
-        setIsSaved(saved.includes(country.name.common));
-
         // Get the search count for this country from localStorage
         const countKey = `searchCount_${country.name.common}`;
         setSearchCount(parseInt(localStorage.getItem(countKey) || "0", 10));
     }, [country.name.common]);
 
-    // Handle save/unsave country
-    const handleSave = () => {
-        const key = "savedCountries";
-        const saved = JSON.parse(localStorage.getItem(key) || "[]");
-        const updated = isSaved
-            ? saved.filter((c) => c !== country.name.common)
-            : [...saved, country.name.common];
-        localStorage.setItem(key, JSON.stringify(updated));
-        setIsSaved(!isSaved);
-    };
 
     const borderCountries = (country.borders || [])
         // Map border country codes to their full country objects, filter out any that aren't found, and limit to 3 for display
@@ -38,7 +24,7 @@ function DetailCard({ country, allCountries }) {
 
     return (
         <div className="detailCard">
-         {/* Back button to return to the previous page */}
+            {/* Back button to return to the previous page */}
             <button className="backBtn" onClick={() => navigate(-1)}>
                 ← Back
             </button>
@@ -56,6 +42,7 @@ function DetailCard({ country, allCountries }) {
                             <p><strong>Population:</strong> {country.population.toLocaleString()}</p>
                             <p><strong>Region:</strong> {country.region}</p>
                             <p><strong>Capital:</strong> {country.capital}</p>
+                            {/* // Display the search count for this country, with proper pluralization */}
                             <p><strong>Searched:</strong> {searchCount} {searchCount === 1 ? "time" : "times"}</p>
                         </div>
                     </div>
@@ -77,12 +64,7 @@ function DetailCard({ country, allCountries }) {
                         </div>
                     )}
 
-                    <button
-                        className={`saveBtn${isSaved ? " saved" : ""}`}
-                        onClick={handleSave}
-                    >
-                        {isSaved ? "♥ Saved" : "♡ Save"}
-                    </button>
+                 <SaveCountry country={country} />
                 </div>
             </div>
         </div>
