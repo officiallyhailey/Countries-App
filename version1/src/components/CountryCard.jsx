@@ -43,7 +43,7 @@ function CountryCard({ countries }) {
                         <p>
                             <strong>Capital:</strong> {country.capital}
                         </p>
-                        <SaveCountry country={country} />
+                        {/* <SaveCountry country={country} /> */}
                     </div>
                 </div>
             ))}

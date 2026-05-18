@@ -35,7 +35,7 @@
 .profile-form button {
     align-self: flex-start;
     padding: 0.6rem 1.4rem;
-    background-color: #4a7bdc;
+    background-color: purple;
     color: white;
     border: none;
     border-radius: var(--border-radius);
@@ -49,7 +49,7 @@
 }
 
 .saved-confirm {
-    color: #4a7bdc;
+    color: purple;
     font-size: 0.9rem;
     margin: 0;
 }
