@@ -11,9 +11,6 @@ function SavedCountries({ countries }) {
     // Read the array of saved country names from localStorage
     const savedNames = JSON.parse(localStorage.getItem("savedCountries") || "[]");
 
-    // Read saved profile to greet the user by name
-    const profile = JSON.parse(localStorage.getItem("userProfile") || "{}");
-
     // Filter the full country list down to only the ones the user saved
     const savedCountries = allCountries.filter((country) =>
         savedNames.includes(country.name.common)
@@ -35,11 +32,6 @@ function SavedCountries({ countries }) {
                 // Reuse the same CountryCard grid from the Home page, in alphabetical order
                 <CountryCard countries={savedCountries} />
             )}
-
-
-            <h2 className="profile-heading">
-                {profile.name ? `Welcome back, ${profile.name}!` : "My Profile"}
-            </h2>
 
             <ProfileForm />
 
