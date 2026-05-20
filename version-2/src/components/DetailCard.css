@@ -27,11 +27,13 @@
 
 .detailLeft {
     flex: 1;
+    display: flex;
+    justify-content: center;
 }
 
 .detailFlag {
-    width: 100%;
-    height: auto;
+    width: 400px;
+    height: 300px;
     border-radius: var(--border-radius);
     box-shadow: var(--card-shadow);
     display: block;
@@ -135,6 +137,11 @@
     .detailContainer {
         flex-direction: column;
         gap: 2rem;
+    }
+
+    .detailFlag {
+    width: 100%;
+    height: auto;
     }
 
     .detailLeft {

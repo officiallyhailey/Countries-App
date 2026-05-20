@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
 import "./ProfileForm.css";
 
-function ProfileForm() {
 
+function ProfileForm() {
+    // State to hold the user's profile info, initialized to null until we fetch it from the server
     const [newUserInfo, setNewUserInfo] = useState(null);
 
     const [name, setName] = useState("");
@@ -13,6 +14,7 @@ function ProfileForm() {
     // Show a confirmation message after saving
     const [saved_, setSaved] = useState(false);
 
+    // Function to fetch the newest user info from the server and update state
     const getUserNewestInfo = async () => {
         try {
             const response = await fetch(
@@ -26,10 +28,12 @@ function ProfileForm() {
         }
     };
 
+    // Fetch the newest user info when the component mounts
     useEffect(() => {
         getUserNewestInfo();
     }, []);
 
+    // When new user info is fetched, update the form fields to show it
     useEffect(() => {
         if (newUserInfo) {
             setName(newUserInfo.name || "");
@@ -42,41 +46,32 @@ function ProfileForm() {
     
     // POST request code for later using instructor API 
 
-    // const handleSubmit = async (e) => {
-    //     e.preventDefault();
-    //     try {
-    //         const response = await fetch(
-    //             'https://backend-answer-keys.onrender.com/add-one-user',
-    //             {
-    //                 method: "POST",
-    //                 headers: { "Content-Type": "application/json" },
-    //                 body: JSON.stringify({ name, email, country_name: country, bio }),
-    //             }
-    //         );
-    //         const text = await response.text();
-    //         console.log("save response:", text);
-    //         if (!response.ok) {
-    //             console.error("Server error:", response.status, text);
-    //             return;
-    //         }
-    //         setSaved(true);
-    //         setTimeout(() => setSaved(false), 6000);
-    //         await getUserNewestInfo();
-    //     } catch (error) {
-    //         console.error("Failed to save user info:", error);
-    //     }
-    // };
-
-
-        const handleSubmit = (e) => {
-        e.preventDefault(); // stop the page from refreshing!
-
-        // Save all fields to localStorage as one object
-        localStorage.setItem(
-            "userProfile",
-            JSON.stringify({ name, email, country, bio }),
-        );
-        setSaved(true);
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        try {
+            const response = await fetch(
+                'https://backend-answer-keys.onrender.com/add-one-user',
+                {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ name, email, country_name: country, bio }),
+                }
+            );
+            const text = await response.text();
+            console.log("save response:", text);
+            if (!response.ok) {
+                console.error("Server error:", response.status, text);
+                return;
+            }
+            // After saving, show the confirmation message and fetch the newest user info to update the form with any changes from the server 
+            setSaved(true);
+            
+            // Hide the confirmation message after a few seconds so it doesn't stay on the screen forever
+            setTimeout(() => setSaved(false), 6000);
+            await getUserNewestInfo();
+        } catch (error) {
+            console.error("Failed to save user info:", error);
+        }
     };
 
     return (

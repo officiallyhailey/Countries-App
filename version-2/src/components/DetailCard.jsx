@@ -5,7 +5,6 @@ import SaveCountry from "./SaveCountry";
 
 function DetailCard({ country, allCountries }) {
     const navigate = useNavigate();
-   
     const [searchCount, setSearchCount] = useState(0);
 
 

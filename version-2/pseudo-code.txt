@@ -38,7 +38,7 @@ This is our WHAT, WHEN, WHERE, HOW framework for working with data:
 TYPE OF HTTP REQUEST (GET OR POST): POST
 API ENDPOINT: 
 
-REQUEST BODY DATA TYPE (if applicable): JSON
+REQUEST BODY DATA TYPE (if applicable): object
 REQUEST BODY (if applicable): 
 {
   "name": "",
@@ -47,7 +47,7 @@ REQUEST BODY (if applicable):
   "bio": ""
 }
 
-RESPONSE DATA TYPE: text
+RESPONSE DATA TYPE: string
 RESPONSE: Success! User has been added.
 
 ❓ WHEN: after submit button is clicked and the data is successfully posted
@@ -55,9 +55,10 @@ RESPONSE: Success! User has been added.
 ❓ WHERE: submit profile data function in the profileform.jsx file 
 
 ❓ HOW:
-Step 1: ------
-Step 2: ------
-Step 3: ------
+Step 1: user fills out the form and clicks submit
+Step 2: handleSUbmit function runs, call another function to do the API call/POST request 
+Step 3: Async - await ... try - catch
+Step 4: Send the post request
 Add more steps as needed!
 
 ========================
