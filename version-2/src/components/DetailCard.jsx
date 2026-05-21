@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "./DetailCard.css";
-import SaveCountry from "./SaveCountry";
+import SaveCountry from "./SaveCountryBtn";
 
 function DetailCard({ country, allCountries }) {
     const navigate = useNavigate();

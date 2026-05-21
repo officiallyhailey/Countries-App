@@ -17,9 +17,8 @@ function SavedCountries({ countries }) {
     );
 
     return (
-        // Show the user's saved countries, or a message if they haven't saved any yet. Also show the profile form to let them save their name for a personalized greeting
+     
         <div className="saved-countries" style={{color: "var(--text-primary)"}}>
-
 
             <h1>My Saved Countries</h1>
 
