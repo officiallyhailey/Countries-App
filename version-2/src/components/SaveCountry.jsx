@@ -6,7 +6,7 @@ function SaveCountry({ country }) {
     // State to track whether this country is currently saved, initialized to false until we check localStorage
     const [isSaved, setIsSaved] = useState(false);
 
-    // When the component mounts, check localStorage to see if this country is in the saved list and update state accordingly
+    // When the component mounts, check localStorage to see if this country is in the saved list and update state accordingly. localStorage is saved in a file on the user's computer, so this allows the saved countries to persist even if they close the browser or refresh the page. We use JSON.parse to convert the saved countries string back into an array that we can check for the current country. If the country is in the saved list, we set isSaved to true so that the button will show as saved.
     useEffect(() => { const savedKey = "savedCountries";
         const saved = JSON.parse(localStorage.getItem(savedKey) || "[]");
         setIsSaved(saved.includes(country.name.common));
@@ -25,6 +25,7 @@ function SaveCountry({ country }) {
     };
 
     return (
+        // The button's className changes based on whether the country is saved, allowing for different styling. The button text also changes to indicate whether the country is currently saved or not. When the button is clicked, it calls handleSave to toggle the saved state and update localStorage.
         <button className={`saveBtn ${isSaved ? "saved" : ""}`} onClick={handleSave}>
             {isSaved ? "♥ Saved" : "♡ Save"}
         </button>
