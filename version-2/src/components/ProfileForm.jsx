@@ -7,12 +7,11 @@ import "./ProfileForm.css";
 
 function ProfileForm() {
 
-    // One state object holds all four form fields instead of four separate variables
+    // One state object holding all four form fields
     const [form, setForm] = useState({ name: "", email: "", country: "", bio: "" });
     const [saved, setSaved] = useState(false);
 
-    // Fetches the newest user info and sets it directly on the form state
-    // (replaces the old two-step: fetch → setNewUserInfo → second useEffect → set each field)
+    // Fetch the newest user info and sets it directly on the form state so the form fields are pre-filled with the latest data.
     const getUserNewestInfo = async () => {
         try {
             const response = await fetch("/api/get-newest-user");
@@ -36,7 +35,7 @@ function ProfileForm() {
         getUserNewestInfo();
     }, []);
 
-    // One handler for all inputs — uses the input's name attribute as the form key
+    // One handler for all inputs using the input's name attribute as the form key
     // [event.target.name] is a computed property name (the variable becomes the key)
     // ...previousForm spreads all existing fields so we only overwrite the one that changed
     const handleChange = (event) => {
