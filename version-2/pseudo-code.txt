@@ -102,22 +102,25 @@ Add more steps as needed!
 ========================
 
 ❓ WHAT...
-TYPE OF HTTP REQUEST (GET OR POST): ------
-API ENDPOINT: ------
+TYPE OF HTTP REQUEST (GET OR POST): Post
+API ENDPOINT: save-one-country
 
-REQUEST BODY DATA TYPE (if applicable): ------
-REQUEST BODY (if applicable): ------
+REQUEST BODY DATA TYPE (if applicable): object
+REQUEST BODY (if applicable): 
+{
+  "country_name": "country"
+}
 
 RESPONSE DATA TYPE: ------
 RESPONSE: ------
 
-❓ WHEN: ------
+❓ WHEN: When user clicks the Save button on a country card or detail card
 
-❓ WHERE: ------
+❓ WHERE: On the country card component as well as the detail page
 
 ❓ HOW:
-Step 1: ------
-Step 2: ------
+Step 1: create function in save button file that runs a post request when clicked to update that the country has been saved, add a concsol log message to display what happens when clicked (success/error)
+Step 2: click the save button
 Step 3: ------
 Add more steps as needed!
 
@@ -126,23 +129,32 @@ Add more steps as needed!
 ========================
 
 ❓ WHAT...
-TYPE OF HTTP REQUEST (GET OR POST): ------
-API ENDPOINT: ------
+TYPE OF HTTP REQUEST (GET OR POST): Get
+API ENDPOINT: get-all-saved-countries
 
-REQUEST BODY DATA TYPE (if applicable): ------
-REQUEST BODY (if applicable): ------
+REQUEST BODY DATA TYPE (if applicable): 
+REQUEST BODY (if applicable): 
 
-RESPONSE DATA TYPE: ------
-RESPONSE: ------
+RESPONSE DATA TYPE: an array of objects
+RESPONSE:
 
-❓ WHEN: ------
+[
+  {
+    "country_name": "country"
+  },
+  {
+    "country_name": "country"
+  }
+]
 
-❓ WHERE: ------
+❓ WHEN: When user clicks into saved country page - the API is called to load saved countries
+
+❓ WHERE: Saved Countries Page
 
 ❓ HOW:
-Step 1: ------
-Step 2: ------
-Step 3: ------
+Step 1: User clicks into page
+Step 2: API call is made 
+Step 3: Returns country cards that have been saved or returns a message prompting user to save their first country to see cards appear 
 Add more steps as needed!
 
 =================================
@@ -155,14 +167,14 @@ Add more steps as needed!
 NOTE: We combine storing & retrieving country counts data into one section because they always happen together. Each time we look up a country’s view count, we also need to increase it and save the new total.
 
 ❓ WHAT...
-TYPE OF HTTP REQUEST (GET OR POST): ------
-API ENDPOINT: ------
+TYPE OF HTTP REQUEST (GET OR POST): POST
+API ENDPOINT: update-one-country-count
 
-REQUEST BODY DATA TYPE (if applicable): ------
+REQUEST BODY DATA TYPE (if applicable): array
 REQUEST BODY (if applicable): ------
 
 RESPONSE DATA TYPE: ------
-RESPONSE: ------
+RESPONSE: array
 
 ❓ WHEN: ------
 
@@ -175,30 +187,3 @@ Step 3: ------
 Add more steps as needed!
 
 
-const [formData, setFormData] = useState({
-    fullName: '',
-    email: '',
-    country: '',
-    bio: '',
-});
-
-const [newUserInfo, setNewUserInfo] = useState(null);
-
-const getNewestUserInfo = async() => {
-    try {
-const response = fetch("/api/get-newest-user");
-const data = await response.json();
-console.log(data)
-    } catch(error) {
-
-}
-}
-
-useEffect(() => {
-    getNewestUserInfo();
-}, [])
-
-const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({...formData, [name]: value});
-};
