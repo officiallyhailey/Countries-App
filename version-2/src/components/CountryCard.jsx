@@ -4,7 +4,9 @@ import SaveCountry from "./SaveCountryBtn";
 
 // The CountryCard component takes  a list of countries as a prop and renders a card for each country, displaying its flag (via the png or the svg if that fails), name, population, region, and capital. The countries are sorted alphabetically by name before rendering.
 
-function CountryCard({ countries }) {
+//onUnsave is a callback function passed down from the parent component that allows the CountryCard to notify the parent when a country has been unsaved. This is used to update the list of saved countries in the parent component, ensuring that the UI stays in sync with the user's actions.
+
+function CountryCard({ countries, onUnsave }) {
     const navigate = useNavigate();
     const sortedCountries = [...countries].sort((a, b) =>
         a.name.common.localeCompare(b.name.common),
@@ -43,7 +45,7 @@ function CountryCard({ countries }) {
                         <p>
                             <strong>Capital:</strong> {country.capital}
                         </p>
-                        <SaveCountry country={country} />
+                        <SaveCountry country={country} onUnsave={onUnsave} />
                     </div>
                 </div>
             ))}
