@@ -10,7 +10,7 @@ function SaveCountry({ country, onUnsave }) {
     useEffect(() => {
         const checkSavedStatus = async () => {
             try {
-                const response = await fetch("https://backend-answer-keys.onrender.com/get-all-saved-countries");
+                const response = await fetch("/api/get-all-saved-countries");
                 const data = await response.json();
                 const savedNames = data.map((item) =>
                     typeof item === "string" ? item : item.country_name
@@ -25,12 +25,13 @@ function SaveCountry({ country, onUnsave }) {
         checkSavedStatus();
     }, [country.name.common]);
 
-    // handleSave is an asynchronous function that is triggered when the user clicks the save button. It determines the appropriate API endpoint based on whether the country is currently saved or not, and then sends a POST request to either save or unsave the country. 
+    // handleSave is an asynchronous (doesn't block the execution of other code while waiting for a response) function that is triggered when the user clicks the save button. It determines the appropriate API endpoint based on whether the country is currently saved or not, and then sends a POST request to either save or unsave the country.
+
     const handleSave = async (e) => {
         e.stopPropagation();
         const endpoint = isSaved
-            ? "https://backend-answer-keys.onrender.com/unsave-one-country"
-            : "https://backend-answer-keys.onrender.com/save-one-country";
+            ? "/api/unsave-one-country"
+            : "/api/save-one-country";
         try {
             const response = await fetch(endpoint, {
                 method: "POST",
@@ -43,6 +44,9 @@ function SaveCountry({ country, onUnsave }) {
                 console.error("Server error:", response.status, text);
                 return;
             }
+
+            // Toggle the saved status in the UI immediately after a successful response from the server, and if the country was unsaved, call the onUnsave callback to update the parent component's state accordingly. This ensures that the UI remains responsive and reflects the user's actions without delay.
+
             setIsSaved(!isSaved);
             if (isSaved && onUnsave) onUnsave(country.name.common);
         } catch (error) {
