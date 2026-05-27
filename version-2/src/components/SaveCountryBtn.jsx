@@ -5,9 +5,8 @@ function SaveCountry({ country, onUnsave }) {
 
      // isSaved, setIsSaved is a state variable that tracks whether the current country is saved or not. It is initialized to false, meaning the country is not saved by default.
     const [isSaved, setIsSaved] = useState(false);
+    const [loaded, setLoaded] = useState(false);
 
-    // useEffect works by defining a function that fetches the list of saved countries from the server and checks if the current country is in that list. Using the async, try, and catch syntax allows us to handle the asynchronous nature of the fetch request and any potential errors that may occur during the process. 
-    
     useEffect(() => {
         const checkSavedStatus = async () => {
             try {
@@ -19,6 +18,8 @@ function SaveCountry({ country, onUnsave }) {
                 setIsSaved(savedNames.includes(country.name.common));
             } catch (error) {
                 console.error("Failed to check saved status:", error);
+            } finally {
+                setLoaded(true);
             }
         };
         checkSavedStatus();
@@ -50,6 +51,8 @@ function SaveCountry({ country, onUnsave }) {
     };
 
     // Render a button that shows "♡ Save" when the country is not saved and "♥ Saved" when it is, with appropriate styling for each state. The button's onClick handler will toggle the saved status of the country.
+    if (!loaded) return null;
+
     return (
         <button className={`saveBtn ${isSaved ? "saved" : ""}`} onClick={handleSave}>
             {isSaved ? "♥ Saved" : "♡ Save"}
