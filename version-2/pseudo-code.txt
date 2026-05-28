@@ -171,19 +171,25 @@ TYPE OF HTTP REQUEST (GET OR POST): POST
 API ENDPOINT: update-one-country-count
 
 REQUEST BODY DATA TYPE (if applicable): array
-REQUEST BODY (if applicable): ------
+REQUEST BODY (if applicable): 
+{
+  "country_name": "France"
+}
 
-RESPONSE DATA TYPE: ------
-RESPONSE: array
+RESPONSE DATA TYPE: array
+RESPONSE: 
+{
+  "count": 3
+}
 
-❓ WHEN: ------
+❓ WHEN: When the country card is clicked 
 
-❓ WHERE: ------
+❓ WHERE: Anywhere the country card is stored
 
 ❓ HOW:
-Step 1: ------
-Step 2: ------
-Step 3: ------
+Step 1: User clicks into the country card
+Step 2: POST request is made to update the count
+Step 3: The returned data is displayed on the details page showing the number of times it's been searched / clicked
 Add more steps as needed!
 
 
