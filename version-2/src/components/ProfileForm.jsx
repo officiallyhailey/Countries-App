@@ -9,6 +9,7 @@ function ProfileForm() {
 
     // One state object holding all four form fields
     const [form, setForm] = useState({ name: "", email: "", country: "", bio: "" });
+    const [savedName, setSavedName] = useState("");
     const [saved, setSaved] = useState(false);
 
     // Fetch the newest user info and sets it directly on the form state so the form fields are pre-filled with the latest data.
@@ -19,6 +20,7 @@ function ProfileForm() {
             console.log("data:", data);
             const user = data[0];
             if (user) {
+                setSavedName(user.name || "");
                 setForm({
                     name: user.name || "",
                     email: user.email || "",
@@ -68,7 +70,7 @@ function ProfileForm() {
     return (
         <div>
             <h2 className="profile-heading">
-                {form.name ? `Welcome back, ${form.name}!` : "My Profile"}
+                {savedName ? `Welcome back, ${savedName}!` : "My Profile"}
             </h2>
 
             <form className="profile-form" onSubmit={handleSubmit}>
