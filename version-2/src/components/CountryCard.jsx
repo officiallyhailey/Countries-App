@@ -18,11 +18,7 @@ function CountryCard({ countries, onUnsave }) {
                 <div
                     className="card"
                     key={country.name.common}
-                    onClick={() => {
-                        const countKey = `searchCount_${country.name.common}`;
-                        const current = parseInt(localStorage.getItem(countKey) || "0", 10);
-                        localStorage.setItem(countKey, String(current + 1));
-                    }}
+                    onClick={() => navigate(`/pages/country/${encodeURIComponent(country.name.common)}`)}
                 >
                     <img
                         src={country.flags.png}
@@ -31,8 +27,6 @@ function CountryCard({ countries, onUnsave }) {
                         onError={(event) => {
                             event.target.src = country.flags.svg;
                         }}
-                        onClick={() => {navigate(
-                            `/pages/country/${encodeURIComponent(country.name.common)}`);}}
                     />
                     <div className="cardContent">
                         <h2>{country.name.common}</h2>

@@ -7,11 +7,22 @@ function DetailCard({ country, allCountries }) {
     const navigate = useNavigate();
     const [searchCount, setSearchCount] = useState(0);
 
-
     useEffect(() => {
-        // Get the search count for this country from localStorage
-        const countKey = `searchCount_${country.name.common}`;
-        setSearchCount(parseInt(localStorage.getItem(countKey) || "0", 10));
+        async function updateCount() {
+            try {
+                const response = await fetch("/api/update-one-country-count", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ country_name: country.name.common }),
+                });
+                const data = await response.json();
+                console.log("API response:", data);
+                setSearchCount(data.count);
+            } catch (error) {
+                console.error("Failed to update country count:", error);
+            }
+        }
+        updateCount();
     }, [country.name.common]);
 
 
