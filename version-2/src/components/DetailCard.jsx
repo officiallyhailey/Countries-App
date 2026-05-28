@@ -16,7 +16,6 @@ function DetailCard({ country, allCountries }) {
                     body: JSON.stringify({ country_name: country.name.common }),
                 });
                 const data = await response.json();
-                console.log("API response:", data);
                 setSearchCount(data.count);
             } catch (error) {
                 console.error("Failed to update country count:", error);

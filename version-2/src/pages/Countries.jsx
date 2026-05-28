@@ -2,7 +2,7 @@ import { useState, useMemo } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch, faChevronDown } from '@fortawesome/free-solid-svg-icons';
 import CountryCards from "../components/CountryCard";
-import "./countries-filter.css";
+import "./Countries-filter.css";
 
 // The home page with the search bar, region filter, and grid of country cards. It loads the full list of countries from the API (or local data if the API fails) and passes it down to the CountryCard component, which handles displaying the cards in a grid. The search and region filter are implemented here in the Home component, and the filtered list of countries is passed down to CountryCard to display. 
 
