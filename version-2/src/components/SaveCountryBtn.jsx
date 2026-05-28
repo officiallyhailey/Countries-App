@@ -59,7 +59,7 @@ function SaveCountry({ country, onUnsave }) {
 
     return (
         <button className={`saveBtn ${isSaved ? "saved" : ""}`} onClick={handleSave}>
-            {isSaved ? "♥ Saved" : "♡ Save"}
+            {isSaved ? "❤️" : "🩶"}
         </button>
     );
 }
