@@ -6,7 +6,7 @@ import SaveCountry from "./SaveCountryBtn";
 
 // onUnsave is a callback function passed down from the parent component that allows the CountryCard to notify the parent when a country has been unsaved. This is used to update the list of saved countries in the parent component, ensuring that the UI stays in sync with the user's actions.
 
-function CountryCard({ countries, onUnsave }) {
+function CountryCard({ countries }) {
     const navigate = useNavigate();
     const sortedCountries = [...countries].sort((a, b) =>
         a.name.common.localeCompare(b.name.common),
@@ -39,7 +39,6 @@ function CountryCard({ countries, onUnsave }) {
                         <p>
                             <strong>Capital:</strong> {country.capital}
                         </p>
-                        <SaveCountry country={country} onUnsave={onUnsave} />
                     </div>
                 </div>
             ))}
