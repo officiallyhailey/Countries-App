@@ -8,7 +8,7 @@ import CountryDetail from "./pages/CountryDetail";
 import "./App.css";
 import data from "/localData.js";
 
-const API = "https://restcountries.com/v3.1/all?fields=name,flags,population,region,capital,cca3,borders";
+const API = "https://countries.com/v3.1/all?fields=name,flags,population,region,capital,cca3,borders";
 
 function App() {
 

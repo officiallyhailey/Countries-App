@@ -35,7 +35,7 @@ function DetailCard({ country, allCountries }) {
     };
 
     const borderCountries = (country.borders || [])
-    // Map border country codes to their full country objects, filter out any that aren't found, and limit to 3 for display
+        // Map border country codes to their full country objects, filter out any that aren't found, and limit to 3 for display
         .map((cca3) => allCountries.find((c) => c.cca3 === cca3))
         .filter(Boolean)
         .slice(0, 3);
@@ -48,7 +48,7 @@ function DetailCard({ country, allCountries }) {
 
             <div className="detailContainer">
                 <div className="detailLeft">
-                       <img src={country.flags.png} alt={`${country.name.common} flag`} className="detailFlag" onError={(e) => { e.target.src = country.flags.svg; }} />
+                    <img src={country.flags.png} alt={`${country.name.common} flag`} className="detailFlag" onError={(e) => { e.target.src = country.flags.svg; }} />
                 </div>
 
                 <div className="detailRight">
