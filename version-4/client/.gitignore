@@ -1,24 +1,10 @@
-# Logs
-logs
-*.log
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-pnpm-debug.log*
-lerna-debug.log*
-
+# installed packages and the vite build output, both get rebuilt from source so neither belongs in the repo.
+# netlify runs npm install and npm run build itself on every deploy, so a committed copy would only go stale
 node_modules
 dist
-dist-ssr
+
+# vite reads these for local-only settings and they can end up holding keys
 *.local
 
-# Editor directories and files
-.vscode/*
-!.vscode/extensions.json
-.idea
-.DS_Store
-*.suo
-*.ntvs*
-*.njsproj
-*.sln
-*.sw?
+# npm writes these when an install fails
+*.log
