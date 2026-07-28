@@ -1,0 +1,20 @@
+.loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 80vh;
+    gap: 1.5rem;
+    color: var(--text-primary);
+    background: transparent;
+    transition: color 0.1s ease;
+}
+
+.loadingFlag {
+    width: 260px;
+    height: 160px;
+    object-fit: cover;
+    border-radius: 6px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.18);
+    transition: opacity 0.15s ease-in-out;
+}
