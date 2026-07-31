@@ -20,7 +20,7 @@ function SavedCountries({ countries }) {
                     typeof item === "string" ? item : item.country_name
                 );
                 const filtered = countries.filter((country) =>
-                    savedNames.includes(country.name.common)
+                    savedNames.includes(country.name)
                 );
                 setSavedCountries(filtered);
             } catch (error) {
@@ -47,7 +47,7 @@ function SavedCountries({ countries }) {
                 <CountryCard
                     countries={savedCountries}
                     onUnsave={(name) =>
-                        setSavedCountries((prev) => prev.filter((c) => c.name.common !== name))
+                        setSavedCountries((prev) => prev.filter((c) => c.name !== name))
                     }
                 />
             )}

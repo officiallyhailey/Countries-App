@@ -97,7 +97,7 @@ app.get(
   }, "Error retrieving saved countries."),
 );
 
-// ON CONFLICT DO NOTHING: re-saving an already-saved country is a no-op, not an error
+// country_name is UNIQUE, so saving the same country twice is not an option. ON CONFLICT DO NOTHING means it gets skipped quietly instead of erroring
 async function saveOneCountry(countryName) {
   await db.query(
     `INSERT INTO saved_countries (country_name)

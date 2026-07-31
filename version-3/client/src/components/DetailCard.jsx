@@ -16,7 +16,7 @@ function DetailCard({ country, allCountries }) {
                 const response = await fetch("/api/update-one-country-count", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ country_name: country.name.common }),
+                    body: JSON.stringify({ country_name: country.name }),
                 });
                 const data = await response.json();
                 setSearchCount(data.count);
@@ -25,7 +25,7 @@ function DetailCard({ country, allCountries }) {
             }
         }
         updateCount();
-    }, [country.name.common]);
+    }, [country.name]);
 
     // on the cards page the grid checks which countries are saved, but there's no grid here, so this page has to ask the server itself and pass the answer to the heart button
     useEffect(() => {
@@ -36,17 +36,17 @@ function DetailCard({ country, allCountries }) {
                 const savedNames = data.map((item) =>
                     typeof item === "string" ? item : item.country_name
                 );
-                setIsSaved(savedNames.includes(country.name.common));
+                setIsSaved(savedNames.includes(country.name));
             } catch (error) {
                 console.error("Failed to check saved status:", error);
             }
         }
         checkSavedStatus();
-    }, [country.name.common]);
+    }, [country.name]);
 
     // the API gives borders as three letter codes like "FRA", so each one gets looked up in the full list to find the country and its real name. the || [] is for islands that have no borders at all, filter(Boolean) removes any codes that didn't match anything, and slice keeps it to three buttons so the row doesn't wrap
     const borderCountries = (country.borders || [])
-        .map((cca3) => allCountries.find((c) => c.cca3 === cca3))
+        .map((code) => allCountries.find((c) => c.alpha3Code === code))
         .filter(Boolean)
         .slice(0, 3);
 
@@ -61,7 +61,7 @@ function DetailCard({ country, allCountries }) {
                 <div className="detailLeft">
                     <img
                         src={country.flags.png}
-                        alt={`${country.name.common} flag`}
+                        alt={`${country.name} flag`}
                         className="detailFlag"
                         onError={(event) => {
                             event.target.src = country.flags.svg;
@@ -70,7 +70,7 @@ function DetailCard({ country, allCountries }) {
                 </div>
 
                 <div className="detailRight">
-                    <h2>{country.name.common}</h2>
+                    <h2>{country.name}</h2>
 
                     <div className="detailContent">
                         <div className="details">
@@ -88,11 +88,11 @@ function DetailCard({ country, allCountries }) {
                             <div className="borderBtns">
                                 {borderCountries.map((bc) => (
                                     <button
-                                        key={bc.cca3}
+                                        key={bc.alpha3Code}
                                         className="borderBtn"
-                                        onClick={() => navigate(`/pages/country/${encodeURIComponent(bc.name.common)}`)}
+                                        onClick={() => navigate(`/pages/country/${encodeURIComponent(bc.name)}`)}
                                     >
-                                        {bc.name.common}
+                                        {bc.name}
                                     </button>
                                 ))}
                             </div>

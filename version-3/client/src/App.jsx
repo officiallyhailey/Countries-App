@@ -12,15 +12,15 @@ import data from "/localData.js";
 // only asking for the fields I actually display, so the response stays small
 const API = "https://countries.dev/countries?fields=name,flags,alpha3Code,population,region,capital,borders";
 
-// countries.dev returns a flatter shape than restcountries.com did (name as a plain string, alpha3Code instead of cca3), so I reshape each country here instead of rewriting every component that expects the old shape
-function toRestCountriesShape(country) {
+// localData.js is saved in the restcountries format, so it gets reshaped into the same shape the API sends before anything uses it
+function toCountriesDevShape(country) {
   return {
-    name: { common: country.name },
+    name: country.name.common,
     flags: { png: country.flags?.png, svg: country.flags?.svg },
+    alpha3Code: country.cca3,
     population: country.population,
     region: country.region,
     capital: country.capital,
-    cca3: country.alpha3Code,
     borders: country.borders,
   };
 }
@@ -38,9 +38,9 @@ function App() {
       try {
         const response = await fetch(API);
         const fetched = await response.json();
-        if (!cancelled) setCountries(fetched.map(toRestCountriesShape));
+        if (!cancelled) setCountries(fetched);
       } catch {
-        if (!cancelled) setCountries(data);
+        if (!cancelled) setCountries(data.map(toCountriesDevShape));
         console.log("Failed to fetch from API, using local data instead");
       }
     };

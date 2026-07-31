@@ -7,7 +7,7 @@ function CountryDetail({ countries }) {
     const allCountries = countries;
     // the name gets encoded when we link to it, so it has to be decoded back before comparing ("Ivory%20Coast" turns into "Ivory Coast")
     const country = allCountries.find(
-        (c) => c.name.common === decodeURIComponent(name),
+        (c) => c.name === decodeURIComponent(name),
     );
 
     // this also catches the moment before App's fetch has finished, when the list is still empty

@@ -21,7 +21,7 @@ function SaveCountryBtn({ country, isSaved: isSavedProp, onUnsave }) {
             const response = await fetch(endpoint, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ country_name: country.name.common }),
+                body: JSON.stringify({ country_name: country.name }),
             });
             const text = await response.text();
             console.log("save response:", text);
@@ -33,7 +33,7 @@ function SaveCountryBtn({ country, isSaved: isSavedProp, onUnsave }) {
             // only changing the heart after the server says it worked, so it can't show as saved when the request failed
             setIsSaved(!isSaved);
             // isSaved is still the old value at this point, so this only runs when unsaving. it tells the saved page to take this card off its list
-            if (isSaved && onUnsave) onUnsave(country.name.common);
+            if (isSaved && onUnsave) onUnsave(country.name);
         } catch (error) {
             console.error("Failed to update saved country:", error);
         }
