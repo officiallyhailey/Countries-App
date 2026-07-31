@@ -17,7 +17,7 @@ Your task: Match your SQL code to each API endpoint.
 -------------------------------------
 
 Paste the link to your "Countries App SQL" DB Fiddle below. 
-If you're having trouble finding it, try checking your submission to assignment titled "Countries App — Version 3 — Milestone: Create SQL Database Schema"
+If you're having trouble finding it, try checking your submission to assignment titled "Countries App - Version 3 - Milestone: Create SQL Database Schema"
 
 🔗 My Countries App SQL DB Fiddle Link: https://www.db-fiddle.com/f/agP3KnySv2A212jW8s6Hrb/6
 

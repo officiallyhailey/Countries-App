@@ -28,7 +28,7 @@ function CountryCard({ countries, onUnsave }) {
 
     // spreading into a new array first because sort changes the original, and countries belongs to App. localeCompare sorts accented names like Åland properly, which a normal > comparison doesn't
     const sortedCountries = [...countries].sort((a, b) =>
-        a.name.common.localeCompare(b.name.common),
+        a.name.localeCompare(b.name),
     );
 
     return (
@@ -37,12 +37,12 @@ function CountryCard({ countries, onUnsave }) {
                 // the whole card is clickable to open the country, which is why the heart button inside it has to stop its own click spreading up to here (see SaveCountryBtn)
                 <div
                     className="card"
-                    key={country.name.common}
-                    onClick={() => navigate(`/pages/country/${encodeURIComponent(country.name.common)}`)}
+                    key={country.name}
+                    onClick={() => navigate(`/pages/country/${encodeURIComponent(country.name)}`)}
                 >
                     <img
                         src={country.flags.png}
-                        alt={`${country.name.common} flag`}
+                        alt={`${country.name} flag`}
                         className="flag"
                         // some of the PNG flags don't load, so swap in the SVG instead of showing a broken image
                         onError={(event) => {
@@ -50,7 +50,7 @@ function CountryCard({ countries, onUnsave }) {
                         }}
                     />
                     <div className="cardContent">
-                        <h2>{country.name.common}</h2>
+                        <h2>{country.name}</h2>
                         <p>
                             <strong>Population:</strong> {country.population.toLocaleString()}
                         </p>
@@ -63,7 +63,7 @@ function CountryCard({ countries, onUnsave }) {
                     </div>
                     <SaveCountryBtn
                         country={country}
-                        isSaved={savedNames.has(country.name.common)}
+                        isSaved={savedNames.has(country.name)}
                         onUnsave={onUnsave}
                     />
                 </div>

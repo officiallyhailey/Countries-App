@@ -11,7 +11,7 @@ app.listen(PORT, () => {
   console.log(`Server listening on port ${PORT}`);
 });
 
-// a Pool instead of a single Client so each request gets its own connection. the connection string comes from an environment variable now instead of config.js, so the database password isn't sitting in the repo
+// a Pool instead of a single Client so each request gets its own connection. the connection string comes from an environment variable, so the database password isn't sitting in the repo
 const db = new pg.Pool({
   connectionString: process.env.DATABASE_URL,
   ssl: true,
@@ -99,7 +99,7 @@ app.get(
   }, "Error retrieving saved countries."),
 );
 
-// ON CONFLICT DO NOTHING: re-saving an already-saved country is a no-op, not an error
+// country_name is UNIQUE, so saving the same country twice is not an option. ON CONFLICT DO NOTHING means it gets skipped quietly instead of erroring
 async function saveOneCountry(countryName) {
   await db.query(
     `INSERT INTO saved_countries (country_name)

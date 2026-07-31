@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import localData from "../../localData.js";
 import "./Loading.css";
 
-// loading screen that flicks through flags instead of a spinner. the flags come from the local data file rather than the API, because this is what shows while the API request is still going
+// loading screen that flicks through flags instead of a spinner. the flags come from the local data file rather than the API, because this is what shows while the API request is still going. localData.js is in the restcountries format, which is why the name is read as name.common here
 const FLAGS = localData
     .filter((c) => c.flags?.png)
     .map((c) => ({ png: c.flags.png, svg: c.flags.svg, name: c.name.common }));

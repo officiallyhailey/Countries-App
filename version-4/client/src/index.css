@@ -1,4 +1,4 @@
-/* dark mode works by setting the same variables to different values, rather than writing out all the styles twice. the components use var(--card-bg) and so on, and App adds the darkTheme class which swaps every value at once. so to change either theme's colours, change them here and the component CSS can stay as it is */
+/* dark mode works by setting the same variables to different values, rather than writing out all the styles twice. the components use var(--card-bg) and so on, and App adds the darkTheme class which swaps every value at once, so no component needs a second set of dark styles */
 :root {
   font-family: 'Nunito Sans', system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;

@@ -22,7 +22,7 @@ function Countries({ countries }) {
     // both filters run together, so picking a region and typing a name narrows the list down instead of one cancelling the other out
     const filteredCountries = useMemo(() => {
         return countries.filter((country) => {
-            const matchesSearch = country.name.common.toLowerCase().includes(searchTerm);
+            const matchesSearch = country.name.toLowerCase().includes(searchTerm);
             const matchesRegion = selectedRegion === allRegions || country.region === selectedRegion;
             return matchesSearch && matchesRegion;
         });

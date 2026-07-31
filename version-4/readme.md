@@ -1,224 +1,215 @@
-# Countries App - Version 3 — Instructions
+# 📝 Countries App Version 4
 
-## 👋 Welcome!
+## 📌 Project Description & Purpose
 
-Now it’s time to build your own backend from scratch! 
+A full stack project utilizing React, Neon, Render, Github, Netlify, and human intelligence!
 
-In this version, you'll:
-- Set up a PostgreSQL database using **Neon.tech**
-- Build a server using **Node.js** and **Express**
-- Create API endpoints that handle HTTP requests to store and retrieve data
+It's a browsable collection of every country in the world. You can search and filter the full list, open any country to see its details and its neighboring countries, heart/save the ones you care about, and fill in a little profile about yourself. The country facts come from a public API, but everything _you_ do - the countries you save, the profile you write, how many times each country page has been opened - is stored in its own PostgreSQL database and served by its own Express API.
 
-This version gives you real-world, hands-on experience designing and connecting your own backend services — a major milestone in full-stack development!
+This is version 4 of the same app, and each version added one layer:
 
-Coming up in Version 4, you’ll deploy your full-stack app to the web and see everything come together. 🚀
+| Version | What got added                                                                                   |
+| ------- | ------------------------------------------------------------------------------------------------ |
+| 0–2     | The React frontend: routing, search, filtering, dark mode, the detail page                       |
+| 3       | its own Neon (PostgreSQL) database and Express server, running on localhost                      |
+| 4       | Deploying all of it - client to Netlify, server to Render - so it's a real, live, full stack app |
 
----
+The point of version 4 was learning what actually changes when code leaves the laptop: secrets can't live in the repo anymore, the frontend can't talk to `localhost:3005` anymore, and the two halves have to find each other over the internet. And they can!
 
-## 🎯 Requirements for Version 3
+## 🚀 Live Site
 
-Build a working PostgreSQL database and Express API/server that allows your frontend to store and retrieve the following data:
+Here's the link to view the live app: [click here](https://countrires-versions.netlify.app/).
 
-1. **Form data**
-    - As a user, when I submit the form, my data should be stored in a PostgreSQL database
-    - If I’ve already submitted the form, I should see “Welcome, [my name]!” above the form on the Saved Countries page
+The API it talks to lives at [click here](https://countries-app-csgs.onrender.com).
 
-2. **Saved Countries**
-    - When I click the Save button on a country’s page, that country should be saved in the database
-    - I should be able to view all saved countries on the Saved Countries page
+> ⚠️ Worth noting: the server is on Render's free tier, so it goes to sleep when nobody's used it for a while. The first request takes 30–60 seconds to wake it up. If saved countries or the profile look empty on first load, give it a moment and refresh - it's not broken, it's just yawning.
 
-3. **View Count**
-    - Each time I open a country’s detail page, the view count for that country should increase by 1
-    - I should be able to see the total number of times I’ve viewed each country
+## 🖼️ Screenshots
 
----
+**Home page** - the full country grid with a search bar and a region filter. Every card is clickable, and the heart in the corner saves it without opening the country (stopPropagation used for that).
 
-## 🔗 Resources
+![Home page in light mode](client/public/screenshot-home-light.png)
 
-- **API Documentation**  
-  Build your Countries API according to the `api-documentation.md` file. 
+**Dark mode** - the toggle lives in the top right and swaps the whole colour scheme. The icon shows what you'd be switching _to_, so a moon when you're in light mode and a sun when you're in dark.
 
----
+![Home page in dark mode](client/public/screenshot-home-dark.png)
 
-## 🚀 Roadmap: Step-by-step guide to building Version 3
+**Country detail page** - population, region, capital, how many times that country's page has been opened, and buttons through to its bordering countries. The "Searched: 3 times" number is coming from its own database.
 
----
+![Guatemala detail page showing stats, border countries and the save button](client/public/screenshot-country-detail.png)
 
-### 🎯 Milestone: SQL Database Schema
-1. Write PostgreSQL code to:
-   a. Create 3 tables: `users`, `saved_countries`, and `country_counts`
-   b. Insert at least 3 rows of sample data into each table
-   c. Write SQL queries your API will need to:
-        - Store and retrieve Form data
-        - Store and retrieve Saved Countries data
-        - Store and retrieve Country Count data
+**Saved Countries** - everything you've hearted, pulled back out of the database. Unhearting a card here removes it straight away.
 
----
+![Saved Countries page with five saved countries](client/public/screenshot-saved-countries.png)
 
-### 🎯 Milestone: Deploy Database to Neon
-1. Follow [this Neon deployment guide](https://github.com/ac-backend/countries-app-instructions/blob/main/version-3/connect-neon-database-to-express-server.md) to help you do the following:
-  - Create a new database
-  - Set up your schema (create the 3 tables and insert rows of sample data)
-  - Confirm that the data was inserted successfully
+**Profile form** - save your name, email, country and bio, and the heading greets you by name when you come back.
 
----
+![Profile form showing a saved user greeted by name](client/public/screenshot-profile-form.png)
 
-### ⚙️ Create your `version-3` folder
+## ✨ Features
 
-1. Open your `countries-app` folder in VS Code. 
-2. In your root `countries-app` folder, create a new folder called `version-3`.
-3. Inside `version-3`, create two folders:
-   - `client` — for your frontend code
-   - `server` — for your backend (API) code
+This is what you can do on the app:
 
----
+- **Browse every country** in a card grid - flag, population, region and capital on each card, sorted alphabetically
+- **Search by name** and **filter by region**, and use both at once to narrow things down
+- **Open any country** for a full detail page, and jump to its bordering countries from there
+- **See how popular a country is** - every time a detail page opens, the app increases a view counter in its database and shows the new total
+- **Save countries** with the heart button, from either the grid or the detail page, and unsave them the same way
+- **Revisit your saved countries** on their own page, which survives a refresh because it's stored in the database, not in the browser
+- **Fill in a profile** (name, email, country, bio) that loads itself back in and greets you by name next time
+- **Switch between light and dark mode**
+- **Use it on a phone** - the layout, the header and the card grid all adapt down to small screens
 
-### 📝 Pseudo-Code your API/Server
+## 🛠️ Tech Stack
 
-1. In your `version-3` folder, create a file called `pseudo-code.txt`.
-2. Open the following link and copy all of its contents into your `pseudo-code.txt` file:  
-https://github.com/ac-backend/countries-app-instructions/blob/main/version-3/pseudo-code.txt
-3. Locate your Countries App DB Fiddle. You will use it as a reference for this task.
-4. Complete the pseudo-code file by filling in all blanks according to the instructions.
-   Your goal is to map the SQL queries you already wrote to the API endpoints you will build.
-   
----
+**Frontend**
 
-### ⚙️ Copy your frontend code into `version-3`
+- **Languages:** JavaScript (ES modules), HTML, CSS
+- **Framework:** React 19 with React Router 7, built with Vite. Font Awesome for the icons
+- **Deployment:** Netlify
 
-1. Copy all files from your `version-2` folder.
-2. Paste them into the `client` folder inside `version-3`.
+**Server/API**
 
-Your `client` folder now contains your Version 3 frontend.
+- **Languages:** JavaScript (Node.js, ES modules)
+- **Framework:** Express 5, with the `pg` library talking to PostgreSQL
+- **Deployment:** Render
 
----
+**Database**
 
-### ⚙️ Set up your `server` folder
+- **Languages:** SQL (PostgreSQL)
+- **Deployment:** Neon
 
-Next, you’ll initialize your backend server.
+**Where the country data itself comes from:** the [countries.dev](https://countries.dev) API. its database never stores country facts - only country _names_, because the frontend already has the full list loaded and can match the two up.
 
-Your `server` folder will eventually include:
-- `package.json` — lists project info and dependencies  
-- `.gitignore` — list of files Git should ignore  
-- `src/` — your app's custom code lives in this folder
-- `src/index.js` — your server/API code  
-- `src/config.js` — your database configuration & password
-- `node_modules/` — installed project dependencies (auto-generated)  
-- `package-lock.json` — lists the locked dependency versions (auto-generated)
+## 🧭 How The Pieces Fit Together
 
-#### Steps
+Every component in the frontend fetches from a relative path like `/api/get-all-saved-countries` - never a full URL. Something in the middle rewrites that into a real address, and it's a different something depending on where you're running:
 
-1. Open the `server` folder in your terminal.
-2. In the `server` folder, run `npm init -y` to generate a `package.json` file. Add `"type": "module"` as a property to the object in this file.
-3. In the `server` folder, create a `.gitignore` file. In this file, list `node_modules` and `config.js`, like this:
+- **Locally:** the proxy block in [vite.config.js](client/vite.config.js) catches anything starting with `/api`, strips the `/api` off, and forwards it to the Render server
+- **Deployed:** [client/public/\_redirects](client/public/_redirects) does the exact same job for Netlify
 
-    <img width="300" alt="Screenshot of a .gitignore file" src="https://github.com/user-attachments/assets/2907cf5e-00c0-472a-8f49-2debd521a91b" />
+Doing it this way means no CORS errors, no API URL hardcoded into fifteen components, and the same code works in both places. The `_redirects` file also has a `/* /index.html 200` line - that's what stops a page refresh on `/pages/saved-countries` returning a 404, since Netlify has no such folder and needs to hand every route to React Router instead.
 
-4. In the `server` folder, create a `src` folder.
-5. Inside the `src` folder, create an `index.js` file and a `config.js` file.
-6. In `config.js`, add the following code and replace `REPLACE_ME` with your Neon database connection string:
+The other thing to notice: the country list is fetched **once**, in [App.jsx](client/src/App.jsx), and passed down to every page as a prop. No page fetches it again. If that fetch fails, the app falls back to a local copy in `localData.js` so it still works offline.
 
-    ```js
-    const config = {
-      databaseUrl:
-        "REPLACE_ME",
-    };
-    
-    export default config;
-    ```
+## 🧑‍💻 Getting It Running Locally
 
-    If you get stuck, use this guide:
-    [How to connect your Neon Database to your Local Express server](https://github.com/ac-backend/countries-app-instructions/blob/main/version-3/connect-neon-database-to-express-server.md)
+You'll need [Node.js](https://nodejs.org) (v18 or newer) and npm.
 
---- 
+**1. Clone the repo and go into this version**
 
-### ⚙️ Install dependencies
+```bash
+git clone https://github.com/<your-username>/countries.git
+cd countries/version-4
+```
 
-1. In VS Code, open the terminal and `cd` into your `server` folder in the `version-3` folder
-2. In the `server` folder, install the `express` and `pg` packages by running these commands:
-    - `npm install express`
-    - `npm install pg`
-3. Confirm the packages installed successfully
-    - `express` and `pg` appear in `package.json` under `dependencies`
-    - A `node_modules` folder was created
-  
---- 
+**2. Start the frontend**
 
-### ✅ Check your setup
+```bash
+cd client
+npm install
+npm run dev
+```
 
-This is what your `client` folder should look like:
+That's it - open the URL Vite prints (usually `http://localhost:5173`) and the app works. The `/api` calls are proxied straight to its live Render server, so you get a working database without setting one up.
 
-<img width="300" alt="Screenshot of client folder structure" src="https://github.com/user-attachments/assets/c9f4de98-0414-44ca-be4e-1b05da0a77b2" />
+**3. (Optional) Run the server locally too**
 
+Only needed if you want to change the API or point at your own database.
 
-This is what your `server` folder should look like:
+```bash
+cd ../server
+npm install
+DATABASE_URL="your-neon-connection-string" npm start
+```
 
-<img width="300" alt="Sreenshot of server folder structure" src="https://github.com/user-attachments/assets/9785ecfd-7634-4669-9b91-10d68e074f6d" />
+The server reads its connection string from the `DATABASE_URL` environment variable and its port from `PORT`, falling back to `3005`. Nothing is hardcoded, and `config.js` and `.env` are both gitignored - the whole reason for the switch in version 4 was to stop the database password from ever living in the repo. 
 
+If you do run the server locally, point the client at it by changing the proxy `target` in [client/vite.config.js](client/vite.config.js) to `http://localhost:3005`.
 
----
+## 🔹 API Documentation
 
-### ⚙️ Connect your Neon-hosted PostgreSQL database to your Express server
-1. [Follow this guide to connect your Neon database to your Express server](https://github.com/ac-backend/countries-app-instructions/blob/main/version-3/connect-neon-database-to-express-server.md).
+These are the API endpoints I built:
 
----
+1. `GET /get-all-users` - every user row
+2. `GET /get-newest-user` - the most recent user, which is what fills the profile form back in
+3. `POST /add-one-user` - saves the profile form
+4. `GET /get-all-saved-countries` - the names of every hearted country
+5. `POST /save-one-country` - hearts a country
+6. `POST /unsave-one-country` - unhearts a country
+7. `POST /update-one-country-count` - increases a country's view count and returns the new number
 
-### ⚙️ Connect your frontend to your backend
-1. In your `client` folder in the `version-3` folder, locate your `vite.config.js` file. 
-2. Update your `vite.config.js` file so that it fetches data from `http://localhost:3000/` as the base URL
+Here's the link to the full API documentation: [api-documentation.md](api-documentation.md)
 
----
+A few decisions worth knowing about if you're reading [server/src/index.js](server/src/index.js):
 
-### ⚙️ Set up your server's boilerplate code 
-1. In your server's `index.js` file, set up your server using the same boilerplate code as the Animals API `node-7-express-sql` project. 
+- **Every route is wrapped in a `handleErrors` function.** They all fail the same way, so rather than writing the same `try/catch` six times, the handler goes inside a wrapper that logs the error and sends back a 500.
+- **All queries use `$1`, `$2` placeholders** instead of pasting values into the SQL string. This is what stops someone typing SQL into the profile form and having it actually run.
+- **Saving uses `ON CONFLICT DO NOTHING`**, so hearting an already-saved country quietly does nothing instead of erroring.
+- **The view counter is an upsert with `RETURNING`** - one round trip both records the visit and hands back the new count, so the detail page doesn't need a second request to display it.
+- **The database uses a connection Pool, not a single Client**, so each request gets its own connection, and there's an `error` listener on it because otherwise a dropped idle connection takes the whole server down.
 
----
+## 🗄️ Database Schema
 
-### 🔷 Build API Endpoints for Form data
-- `POST /add-one-user`: Save submitted form data
-- `GET /get-newest-user`: Return the form data if it exists
-- Test your API endpoints in Postman to make sure they're working
-- Test your API endpoints with your frontend
+Here's the SQL I used to create its tables:
 
----
+```sql
+-- the profile form. saving never updates, it always inserts a new row,
+-- and the app just reads whichever user_id is highest, so no timestamp column is needed
+CREATE TABLE users (
+  user_id SERIAL PRIMARY KEY,
+  name TEXT,
+  country_name TEXT,
+  email TEXT,
+  bio TEXT
+);
 
-### 🔷 Build API Endpoints for Saved Countries
-- `POST /save-one-country`: Save a country
-- `GET /get-all-saved-countries`: Return all saved countries
-- Test your API endpoints in Postman to make sure they're working
-- Test your API endpoints with your frontend
+-- the heart button. only names go in here, because the frontend already has
+-- the full country list to match them against.
+-- country_name is UNIQUE so ON CONFLICT DO NOTHING has something to conflict on
+CREATE TABLE saved_countries (
+  saved_country_id SERIAL PRIMARY KEY,
+  country_name TEXT UNIQUE NOT NULL
+);
 
----
+-- how many times each country's detail page has been opened.
+-- country_name is the primary key so the upsert can find an existing row to increase
+CREATE TABLE country_counts (
+  country_name TEXT PRIMARY KEY,
+  count INTEGER NOT NULL DEFAULT 0
+);
+```
 
-### 🔷 Build API Endpoint for Country Count
-- `POST /update-one-country-count`: Increment the view count
-- Test your API endpoint in Postman to make sure they're working
-- Test your API endpoints with your frontend
+## 💭 Reflections
 
----
+**What I learned:**
+This is a little emotional of an answer - because the answer is SO much
 
-### Test everything again... and again! 
-1. Test all user flows: submitting the form, saving a country, viewing a country’s view count
-2. Check your database to make sure the data is updating correctly
+#### This project covered 
+- Deployment and environments using Netlify, Render, Neon, Github
+- Request paths 
+- Backend / Express: middleware the app needs
+- Database / SQL: creating, connecting, querying, storing, appending and more!
+- Third party API
+- useEffect, useState, useMemo and more!
 
----
+In Hailey terms I can now build all three layers and wire them together: a SQL database that stores the data, an Express server that queries and updates it, and a React frontend that talks to that server rather than the database. It all lives in one repo on GitHub, with Neon holding the database, Render running the server and Netlify serving the frontend - and styled so it is functional for the user. A full stack app, end to end, wow.
 
-### Clean and Comment your code
-1. Refactor your backend code to make it clean and modular
-2. Comment complex logic to explain how it works
+**What I'm proud of:**
+Feeling less of the imposter syndrome when thinking of myself as a Fullstack Developer 
 
----
+**What challenged me:**
+So many new concepts. I'm good at copy / pasting concepts (as in seeing an example and remembering where it should go) but there was a lot of new things to dig into and understand on a deeper level than frontend. Making a grid layout is straight forward but understanding node packages and hooks and setting everything up and really understanding the what and why behind it all took time and will continue to be a learning curve to grasp. This is just the beginning to so much more but the foundation is good.
 
-### Deploy & Submit
-1. Push your code to Github
-2. Submit to Canvas!
+**Future ideas for how I'd continue building this project:**
 
----
+1. Adding mapbox API so you could see a real world map that has pins in all your saved countries in the saved countries page - possibly making that a "Oh The Places I've Been" as a spin off of the Dr Suse book "Oh the places you'll go" and it can be your app of places you've traveled with the ability to save notes and pictures from that trip
+2. Making this something people could have logins for so they could sync their content across devices and even connect with other people so they could share each others stories of traveling 
+3. Adding the ability to save the countries you've been to as well as where you would like to go next and build out for each country a full page of common places to visit when there that a user could save as they plan their trip. 
 
-## 🌟 Stretch Goals (Optional)
+## 🙌 Credits & Shoutouts
 
-Finished the main requirements? Here are some bonus challenges:
+If you used any resources for inspiration, tutorials, or documentation, you can mention them here.
+You can also give a shoutout to anyone who helped you along the way.
 
-- 🏆 Add an `/unsave-one-country` API endpoint to unsave a single country
-- 🏆 Add an `/unsave-all-countries` API endpoint to unsave all countries
-- 🏆 Add a `/reset-one-country-count` API endpoint to reset a country's count back to 0 
+Shoutout to all of us for getting this far. Seeing my classmates work hard and push through things helped keep me motivated when I was stuck - in it to win it, together. 

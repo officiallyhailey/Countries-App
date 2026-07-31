@@ -15,12 +15,12 @@ function SavedCountries({ countries }) {
             try {
                 const response = await fetch("/api/get-all-saved-countries");
                 const data = await response.json();
-                // server may return strings or { country_name } objects
+                // each row comes back as a { country_name } object, so this pulls the plain name out of every one to compare against the country list
                 const savedNames = data.map((item) =>
                     typeof item === "string" ? item : item.country_name
                 );
                 const filtered = countries.filter((country) =>
-                    savedNames.includes(country.name.common)
+                    savedNames.includes(country.name)
                 );
                 setSavedCountries(filtered);
             } catch (error) {
@@ -47,7 +47,7 @@ function SavedCountries({ countries }) {
                 <CountryCard
                     countries={savedCountries}
                     onUnsave={(name) =>
-                        setSavedCountries((prev) => prev.filter((c) => c.name.common !== name))
+                        setSavedCountries((prev) => prev.filter((c) => c.name !== name))
                     }
                 />
             )}

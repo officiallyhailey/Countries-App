@@ -44,7 +44,7 @@ function ProfileForm() {
             const response = await fetch("/api/add-one-user", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                // rename country -> country_name to match the API
+                // the form calls it country but the API expects country_name
                 body: JSON.stringify({ ...form, country_name: form.country }),
             });
             const text = await response.text();

@@ -1,10 +1,12 @@
-# installed packages and the vite build output, both get rebuilt from source so neither belongs in the repo.
-# netlify runs npm install and npm run build itself on every deploy, so a committed copy would only go stale
+# both of these come back on their own, npm install rebuilds node_modules and netlify runs the build itself, so a copy in here would just go stale
 node_modules
 dist
 
-# vite reads these for local-only settings and they can end up holding keys
+# vite picks these up for local settings and they can end up with keys in them
 *.local
 
-# npm writes these when an install fails
+# npm only writes these when an install fails
 *.log
+
+# mac drops these in every folder I've opened
+.DS_Store

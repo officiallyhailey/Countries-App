@@ -1,2 +1,9 @@
 node_modules
+
+# the database url comes from an environment variable now, but I'm keeping these two ignored so that if I ever make
+# either file to run the server locally, the neon password can't follow it into the repo
 config.js
+.env
+
+# mac drops these in every folder I've opened
+.DS_Store
