@@ -4,7 +4,7 @@ import { faSearch, faChevronDown } from '@fortawesome/free-solid-svg-icons';
 import CountryCards from "../components/CountryCard";
 import "./countries-filter.css";
 
-// The home page with the search bar, region filter, and grid of country cards. It loads the full list of countries from the API (or local data if the API fails) and passes it down to the CountryCard component, which handles displaying the cards in a grid. The search and region filter are implemented here in the Home component, and the filtered list of countries is passed down to CountryCard to display. 
+// home page: search bar, region filter, and the full country grid. the countries come in as a prop from App, so this page only keeps track of what's been typed and picked
 
 const allRegions = "Filter by Region";
 

@@ -16,15 +16,15 @@ function DetailCard({ country, allCountries }) {
     }, [country.name.common]);
 
 
+    // borders come through as three letter codes like "FRA", so each one gets looked up in the full list to find its real name. the || [] is for islands with no borders, and slice keeps it to three buttons so the row doesn't wrap
     const borderCountries = (country.borders || [])
-        // Map border country codes to their full country objects, filter out any that aren't found, and limit to 3 for display
         .map((cca3) => allCountries.find((c) => c.cca3 === cca3))
         .filter(Boolean)
         .slice(0, 3);
 
     return (
         <div className="detailCard">
-            {/* Back button to return to the previous page */}
+            {/* -1 goes back one page in history instead of to a set route, so you land back on whatever search or filter you had */}
             <button className="backBtn" onClick={() => navigate(-1)}>
                 ← Back
             </button>
@@ -42,7 +42,6 @@ function DetailCard({ country, allCountries }) {
                             <p><strong>Population:</strong> {country.population.toLocaleString()}</p>
                             <p><strong>Region:</strong> {country.region}</p>
                             <p><strong>Capital:</strong> {country.capital}</p>
-                            {/* // Display the search count for this country, with proper pluralization */}
                             <p><strong>Searched:</strong> {searchCount} {searchCount === 1 ? "time" : "times"}</p>
                         </div>
                     </div>

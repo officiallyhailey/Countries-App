@@ -3,7 +3,7 @@ import ProfileForm from "../components/ProfileForm";
 import "/src/index.css";
 
 
-// This page shows the user's saved countries, and also includes the profile form so they can save their name for a personalized greeting. It reuses the same CountryCard grid from the Home page, but filters the list of countries down to just the ones the user has saved. It also reads the user's profile from localStorage to greet them by name if they've saved it.
+// saved page: the countries you've hearted, plus the profile form. localStorage only holds the names, so this page matches those names against the full list to get the flags and the rest of the info
 
 function SavedCountries({ countries }) {
     const allCountries = countries;
@@ -20,19 +20,17 @@ function SavedCountries({ countries }) {
     );
 
     return (
-        // Show the user's saved countries, or a message if they haven't saved any yet. Also show the profile form to let them save their name for a personalized greeting
         <div className="saved-countries" style={{color: "var(--text-primary)"}}>
 
 
             <h1>My Saved Countries</h1>
 
             {savedCountries.length === 0 ? (
-                // Show a  message when nothing has been saved yet
                 <p className="empty-message">
                     No saved countries yet. Open a country and click ♡ Save to add it here!
                 </p>
             ) : (
-                // Reuse the same CountryCard grid from the Home page, in alphabetical order
+                // same grid as the home page, just given a shorter list
                 <CountryCard countries={savedCountries} />
             )}
 

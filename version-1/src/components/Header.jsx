@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart, faSun, faMoon } from "@fortawesome/free-solid-svg-icons";
 import "./Header.css";
 
-// The header component with the title, theme toggle, and link to saved countries
+// the top bar. dark mode is handled in App, this just gets the current setting and the toggle function passed in as props
 
 function Header({ isDarkMode, toggleTheme }) {
     const nav = useNavigate();

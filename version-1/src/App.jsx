@@ -12,13 +12,13 @@ const API = "https://restcountries.com/v3.1/all?fields=name,flags,population,reg
 
 function App() {
 
-  // State for the list of all countries, and whether dark mode is on
+  // dark mode is kept up here because the darkTheme class goes on the outermost div, so the colours in index.css reach everything inside it
   
   const [countries, setCountries] = useState([]);
   const [isDarkMode, setIsDarkMode] = useState(false);
   const toggleTheme = () => setIsDarkMode(prev => !prev);
 
-// Load the country data from the API, or fall back to local data if the fetch fails
+  // falls back to the local data file if the API fetch fails, so there's still something to show
 
   useEffect(() => {
     let cancelled = false;
@@ -34,7 +34,6 @@ function App() {
       }
     };
 
-// Call the function to load countries when the component boots
 
     getCountries();
     return () => { cancelled = true; };
