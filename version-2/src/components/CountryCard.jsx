@@ -2,12 +2,10 @@ import { useNavigate } from "react-router-dom";
 import "./CountryCard.css";
 import SaveCountry from "./SaveCountryBtn";
 
-// The CountryCard component takes a list of countries as a prop and renders a card for each country, displaying its flag (via the png or the svg if that fails), name, population, region, and capital. The countries are sorted alphabetically by name before rendering.
-
-// onUnsave is a callback function passed down from the parent component that allows the CountryCard to notify the parent when a country has been unsaved. This is used to update the list of saved countries in the parent component, ensuring that the UI stays in sync with the user's actions.
-
+// renders a grid of country cards, sorted alphabetically by name. used on both the home page and the saved page, the only difference is which list gets passed in
 function CountryCard({ countries }) {
     const navigate = useNavigate();
+    // spreading into a new array first because sort changes the original, and countries belongs to App. localeCompare sorts accented names like Åland properly, which a normal > comparison doesn't
     const sortedCountries = [...countries].sort((a, b) =>
         a.name.common.localeCompare(b.name.common),
     );
@@ -24,6 +22,7 @@ function CountryCard({ countries }) {
                         src={country.flags.png}
                         alt={`${country.name.common} flag`}
                         className="flag"
+                        // some of the PNG flags don't load, so swap in the SVG instead of showing a broken image
                         onError={(event) => {
                             event.target.src = country.flags.svg;
                         }}

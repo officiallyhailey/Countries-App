@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
 import "./DetailCard.css";
 
+// the heart button, used on the cards and on the detail page. it asks the server whether this country is already saved so the heart shows the right state when the page opens
 function SaveCountry({ country, onUnsave }) {
-
-     // isSaved, setIsSaved is a state variable that tracks whether the current country is saved or not. It is initialized to false, meaning the country is not saved by default.
+    // starts empty and gets corrected by the fetch below, so the heart is grey for a moment until the server answers
     const [isSaved, setIsSaved] = useState(false);
 
     useEffect(() => {
@@ -22,9 +22,9 @@ function SaveCountry({ country, onUnsave }) {
         checkSavedStatus();
     }, [country.name.common]);
 
-    // handleSave is an asynchronous (doesn't block the execution of other code while waiting for a response) function that is triggered when the user clicks the save button. It determines the appropriate API endpoint based on whether the country is currently saved or not, and then sends a POST request to either save or unsave the country.
-
+    // the same button does both jobs, it just picks the save or the unsave endpoint depending on whether it's already saved
     const handleSave = async (e) => {
+        // the card around this button opens the country when it's clicked, so the click gets stopped here or saving would send you to the detail page as well
         e.stopPropagation();
         const endpoint = isSaved
             ? "/api/unsave-one-country"
@@ -42,16 +42,15 @@ function SaveCountry({ country, onUnsave }) {
                 return;
             }
 
-            // Toggle the saved status in the UI immediately after a successful response from the server, and if the country was unsaved, call the onUnsave callback to update the parent component's state accordingly. This ensures that the UI remains responsive and reflects the user's actions without delay.
-
+            // only changing the heart after the server says it worked, so it can't show as saved when the request failed
             setIsSaved(!isSaved);
+            // isSaved is still the old value at this point, so this only runs when unsaving. it tells the saved page to take this card off its list
             if (isSaved && onUnsave) onUnsave(country.name.common);
         } catch (error) {
             console.error("Failed to update saved country:", error);
         }
     };
 
-    // Render a button that shows "♡ Save" when the country is not saved and "♥ Saved" when it is, with appropriate styling for each state. The button's onClick handler will toggle the saved status of the country.
     return (
         <button className={`saveBtn ${isSaved ? "saved" : ""}`} onClick={handleSave}>
             {isSaved ? "❤️" : "🩶"}

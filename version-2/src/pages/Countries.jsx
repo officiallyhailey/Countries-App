@@ -4,20 +4,22 @@ import { faSearch, faChevronDown } from '@fortawesome/free-solid-svg-icons';
 import CountryCards from "../components/CountryCard";
 import "./Countries-filter.css";
 
-// The home page with the search bar, region filter, and grid of country cards. It loads the full list of countries from the API (or local data if the API fails) and passes it down to the CountryCard component, which handles displaying the cards in a grid. The search and region filter are implemented here in the Home component, and the filtered list of countries is passed down to CountryCard to display. 
+// home page: search bar, region filter, and the full country grid. the countries come in as a prop from App, so this page only keeps track of what's been typed and picked
 
+// used as both the default dropdown label and the "show everything" value, so there's only one string to check against
 const allRegions = "Filter by Region";
 
 function Home({ countries }) {
         const [searchTerm, setSearchTerm] = useState("");
         const [selectedRegion, setSelectedRegion] = useState(allRegions);
 
-        
+        // building the region list from the countries themselves instead of typing them out, so it still matches if the data changes. useMemo means it only rebuilds when the country list does, not every time you type in the search box
         const regions = useMemo(() => {
             const uniqueRegions = new Set(countries.map((country) => country.region));
             return Array.from(uniqueRegions);
         }, [countries]);
 
+        // both filters run together, so picking a region and typing a name narrows the list down instead of one cancelling the other out
         const filteredCountries = useMemo(() => {
             return countries.filter((country) => {
                 const matchesSearch = country.name.common.toLowerCase().includes(searchTerm);
@@ -42,6 +44,7 @@ function Home({ countries }) {
                         <input type="text" placeholder="Search for a country..." onChange={handleSearch} />
                     </div>
                     <div className="filters">
+                        {/* the wrapper is here so I can hide the default dropdown arrow in CSS and put my own icon on top */}
                         <div className="selectWrapper">
                             <select value={selectedRegion} onChange={handleRegionChange}>
                                 <option value={allRegions}>{allRegions}</option>

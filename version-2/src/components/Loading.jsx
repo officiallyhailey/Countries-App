@@ -1,19 +1,20 @@
 import { useState, useEffect } from "react";
 import localData from "../../localData.js";
 
-// FLAGS is an array of objects, each containing the png and svg URLs of a country's flag, as well as the country's common name. This array is created by filtering the localData to include only countries that have a png flag, and then mapping over the filtered data to extract the relevant information for each country. This allows us to easily access and display the flags in our loading component.
+// loading screen that flicks through flags instead of a spinner. the flags come from the local data file rather than the API, because this is what shows while the API request is still going
 const FLAGS = localData
     .filter((c) => c.flags?.png)
     .map((c) => ({ png: c.flags.png, svg: c.flags.svg, name: c.name.common }));
 
-// INTERVAL_MS is a constant that defines the time interval (in milliseconds) at which the loading component will cycle through the different flags. In this case, it is set to 300 milliseconds, meaning that the displayed flag will change every 0.3 seconds while the loading component is active.
 const INTERVAL_MS = 300;
 
 function Loading() {
+    // starts on a random flag so a quick load isn't always the same one. writing it as a function means it only picks once, instead of picking a new random number on every render
     const [index, setIndex] = useState(() =>
         Math.floor(Math.random() * FLAGS.length),
     );
 
+    // the % wraps back round to the first flag when it reaches the end, so it never runs out. clearInterval stops the timer once loading is done and this disappears
     useEffect(() => {
         const id = setInterval(() => {
             setIndex((i) => (i + 1) % FLAGS.length);
@@ -23,7 +24,7 @@ function Loading() {
 
     const current = FLAGS[index];
 
-    // kept the css directly in this component since it's only used here and it felt more efficient to manage it this way rather than creating a separate CSS file for a single component. This approach allows for easier maintenance and quicker adjustments to the styling without having to navigate between multiple files.
+    // the styles are written inline here because this loading screen is the only thing using them, so there's no CSS file for it
     return (
         <div
             style={{

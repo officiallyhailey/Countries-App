@@ -3,10 +3,12 @@ import { useNavigate } from "react-router-dom";
 import "./DetailCard.css";
 import SaveCountry from "./SaveCountryBtn";
 
+// the single country page: flag, stats, how many times it's been searched, border links and the heart button
 function DetailCard({ country, allCountries }) {
     const navigate = useNavigate();
     const [searchCount, setSearchCount] = useState(0);
 
+    // bumps the view count on the server every time this page loads. the server sends the new count back in its response, so one request both records the visit and gives me the number to show
     useEffect(() => {
         async function updateCount() {
             try {
@@ -25,15 +27,15 @@ function DetailCard({ country, allCountries }) {
     }, [country.name.common]);
 
 
+    // the API gives borders as three letter codes like "FRA", so each one gets looked up in the full list to find the country and its real name. the || [] is for islands that have no borders at all, filter(Boolean) removes any codes that didn't match anything, and slice keeps it to three buttons so the row doesn't wrap
     const borderCountries = (country.borders || [])
-        // Map border country codes to their full country objects, filter out any that aren't found, and limit to 3 for display
         .map((cca3) => allCountries.find((c) => c.cca3 === cca3))
         .filter(Boolean)
         .slice(0, 3);
 
     return (
         <div className="detailCard">
-            {/* Back button to return to the previous page */}
+            {/* -1 means go back one page in history instead of to a set route, so you land back on whatever search or filter you had */}
             <button className="backBtn" onClick={() => navigate(-1)}>
                 ← Back
             </button>
@@ -58,11 +60,11 @@ function DetailCard({ country, allCountries }) {
                             <p><strong>Population:</strong> {country.population.toLocaleString()}</p>
                             <p><strong>Region:</strong> {country.region}</p>
                             <p><strong>Capital:</strong> {country.capital}</p>
-                            {/* // Display the search count for this country, with proper pluralization */}
                             <p><strong>Searched:</strong> {searchCount} {searchCount === 1 ? "time" : "times"}</p>
                         </div>
                     </div>
 
+                    {/* hides the whole section for countries with no borders, so there's no empty heading sitting there */}
                     {borderCountries.length > 0 && (
                         <div className="borderCountries">
                             <strong>Border Countries:</strong>
