@@ -22,9 +22,8 @@ function DetailCard({ country, allCountries }) {
         setSearchCount(updated);
     }, [country.name.common]);
 
-    // Handle save/unsave country
+    // the same button saves and unsaves, it just checks isSaved to work out which one to do
     const handleSave = () => {
-        // Toggle save state in localStorage
         const key = "savedCountries";
         const saved = JSON.parse(localStorage.getItem(key) || "[]");
         const updated = isSaved
@@ -34,8 +33,8 @@ function DetailCard({ country, allCountries }) {
         setIsSaved(!isSaved);
     };
 
+    // borders come through as three letter codes like "FRA", so each one gets looked up in the full list to find its real name. the || [] is for islands with no borders, and slice keeps it to three buttons so the row doesn't wrap
     const borderCountries = (country.borders || [])
-        // Map border country codes to their full country objects, filter out any that aren't found, and limit to 3 for display
         .map((cca3) => allCountries.find((c) => c.cca3 === cca3))
         .filter(Boolean)
         .slice(0, 3);

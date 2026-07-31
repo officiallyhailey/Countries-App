@@ -7,17 +7,16 @@ const allRegions = "Filter by Region";
 
 function Home() {
 
-    // Initialize the countries state with the data from localData.js
+    // countries starts as the whole list and gets replaced by the filtered version when you search or pick a region
     const [countries, setCountries] = useState(data);
 
-    // Use useMemo to compute the unique regions from the data, ensuring it only recomputes when the data changes
-    
+    // building the region list from the data itself instead of typing them out, so it still matches if the data changes
     const regions = useMemo(() => {
         const uniqueRegions = new Set(data.map((country) => country.region));
         return Array.from(uniqueRegions);
     }, []);
 
-    // Handler for the search input, filters countries based on the search term
+    // both handlers filter from data rather than countries, so a new search starts from the full list instead of narrowing what's already been narrowed
     const handleSearch = (event) => {
         const searchTerm = event.target.value.toLowerCase();
         const filteredCountries = data.filter((country) =>
@@ -25,7 +24,6 @@ function Home() {
         );
         setCountries(filteredCountries);
     };
-// Handler for the region select dropdown, filters countries based on the selected region
     const handleRegionChange = (event) => {
         const selectedRegion = event.target.value;
         const filteredCountries = selectedRegion === allRegions
@@ -36,7 +34,6 @@ function Home() {
 
 
     return (
-        // Render the search bar, region filter, and the country cards
         <div className="home">
             <div className="filter">
                 <div className="searchBar">

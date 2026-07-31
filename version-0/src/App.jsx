@@ -4,7 +4,7 @@ import Home from "./pages/Home";
 import SavedCountries from "./pages/SavedCountries";
 import CountryDetail from "./pages/CountryDetail";
 import "./App.css";
-//Set up routing for the application, including a default route that redirects to the home page
+// "/" redirects to pages/home so there's only one route actually drawing the home page
 function App() {
   return (
     <div className="App">
