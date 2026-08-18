@@ -38,9 +38,9 @@ The API it talks to lives at [click here](https://countries-app-csgs.onrender.co
 
 ![Guatemala detail page showing stats, border countries and the save button](client/public/screenshot-country-detail.png)
 
-**Saved Countries** - everything you've hearted, pulled back out of the database. Unhearting a card here removes it straight away.
+**Saved Countries** - everything you've hearted, pulled back out of the database and shown as pins on a real Mapbox map. Each pin is that country's flag, and clicking one opens a popup with its capital, a link through to its detail page, and a heart to unsave it, which drops the pin straight away.
 
-![Saved Countries page with five saved countries](client/public/screenshot-saved-countries.png)
+![Saved Countries page showing six saved countries as flag pins on a world map](client/public/screenshot-saved-countries.png)
 
 **Profile form** - save your name, email, country and bio, and the heading greets you by name when you come back.
 
@@ -113,7 +113,25 @@ npm run dev
 
 That's it - open the URL Vite prints (usually `http://localhost:5173`) and the app works. The `/api` calls are proxied straight to its live Render server, so you get a working database without setting one up.
 
-**3. (Optional) Run the server locally too**
+**3. Add a Mapbox token for the saved countries map**
+
+The Saved Countries page shows your saved countries as pins on a real map, which needs a free Mapbox token.
+
+```bash
+cp .env.example .env.local
+```
+
+Then open `.env.local`, paste the token after `VITE_MAPBOX_TOKEN=`, and restart the dev server. Vite only reads the file at startup.
+
+**It has to be a public token, the kind that starts with `pk.`** Mapbox also issues secret tokens starting with `sk.`, which carry write access to the account. Vite inlines whatever is in this variable straight into the JavaScript bundle, so a secret token would be readable by anyone who opened devtools on the deployed site.
+
+The map component checks the prefix and will not pass anything other than a `pk.` token to Mapbox, so a secret one shows the unavailable state instead of a working map. That check runs in the browser though, which is after Vite has already inlined the value, so it stops a secret token being used but not from being present in the bundle. The variable must only ever hold a public token.
+
+Public tokens are designed to be visible in frontend code, so the thing that actually protects one is a URL restriction set on the token in the Mapbox account, limiting it to the deployed domain and localhost.
+
+Without a token the rest of the page works exactly as before and the map area shows a short unavailable message. `.env.local` is covered by the `*.local` rule in [client/.gitignore](client/.gitignore), so the token never reaches the repo. On Netlify the same variable goes in the site's build environment, and because Vite bakes it in at build time an existing deploy needs a fresh build to pick it up.
+
+**4. (Optional) Run the server locally too**
 
 Only needed if you want to change the API or point at your own database.
 

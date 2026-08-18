@@ -2,3 +2,19 @@
     color: var(--text-primary);
     transition: color 0.1s ease;
 }
+
+/* stands in for the map while its chunk downloads, at the same height so nothing shifts when it lands */
+.mapPlaceholder {
+    height: 520px;
+    margin-bottom: 3rem;
+    border-radius: var(--border-radius);
+    background: var(--card-bg);
+    box-shadow: var(--card-shadow);
+}
+
+@media (max-width: 600px) {
+    .mapPlaceholder {
+        height: 300px;
+        margin-bottom: 2rem;
+    }
+}

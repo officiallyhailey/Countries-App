@@ -9,8 +9,9 @@ import CountryDetail from "./pages/CountryDetail";
 import "./App.css";
 import data from "/localData.js";
 
-// only asking for the fields I actually display, so the response + loading time stays small
-const API = "https://countries.dev/countries?fields=name,flags,alpha3Code,population,region,capital,borders";
+// only the fields used by the app, so the response and loading time stay small. latlng is the one
+// that isn't displayed anywhere: it positions the pins on the saved page map
+const API = "https://countries.dev/countries?fields=name,flags,alpha3Code,population,region,capital,borders,latlng";
 
 // localData.js is saved in the restcountries format, so it gets reshaped into the same shape the API sends before anything uses it
 function toCountriesDevShape(country) {
@@ -22,6 +23,7 @@ function toCountriesDevShape(country) {
     region: country.region,
     capital: country.capital,
     borders: country.borders,
+    latlng: country.latlng,
   };
 }
 
@@ -58,7 +60,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Countries countries={countries} />} />
           <Route path="pages/home" element={<Countries countries={countries} />} />
-          <Route path="pages/saved-countries" element={<SavedCountries countries={countries} />} />
+          <Route path="pages/saved-countries" element={<SavedCountries countries={countries} isDarkMode={isDarkMode} />} />
           <Route path="pages/country/:name" element={<CountryDetail countries={countries} />} />
         </Routes>
       </div>

@@ -1,0 +1,143 @@
+/* sits in the same visual family as the cards, so it uses the same variables from index.css rather than
+   its own colours. that also means dark mode swaps it over with everything else */
+.worldMap {
+    height: 520px;
+    margin-bottom: 3rem;
+    border-radius: var(--border-radius);
+    box-shadow: var(--card-shadow);
+    background: var(--card-bg);
+    /* the map canvas is a square, so without this it draws over the rounded corners */
+    overflow: hidden;
+}
+
+/* shown in place of the map when there is no usable token */
+.worldMapFallback {
+    display: grid;
+    place-items: center;
+    padding: 2rem;
+    text-align: center;
+    color: var(--text-secondary);
+}
+
+.worldMapFallback code {
+    color: var(--text-primary);
+    font-size: 0.9em;
+}
+
+/* the flag pin. a button rather than a div so it is reachable by keyboard */
+.pin {
+    width: 34px;
+    height: 34px;
+    padding: 0;
+    border: 2px solid #fff;
+    border-radius: 50%;
+    background: none;
+    cursor: pointer;
+    overflow: hidden;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.35);
+    transition: transform 0.15s ease;
+    display: block;
+}
+
+.pin img {
+    width: 100%;
+    height: 100%;
+    /* cover instead of contain, because flags aren't square and contain would leave gaps in the circle */
+    object-fit: cover;
+    display: block;
+}
+
+.pin:hover,
+.pin:focus-visible {
+    transform: scale(1.25);
+    /* lifts the hovered pin above its neighbours, which matters where countries sit close together */
+    z-index: 1;
+}
+
+/* mapbox's popup is white in both themes, so its own wrapper gets restyled here or it glares in dark mode */
+.pinPopup .mapboxgl-popup-content {
+    padding: 0;
+    border-radius: var(--border-radius);
+    background: var(--card-bg);
+    box-shadow: var(--card-shadow);
+    overflow: hidden;
+}
+
+/* the little arrow joining the popup to the pin. it's a separate element, so it needs the colour too.
+   mapbox puts the arrow on whichever edge faces the pin and colours it with a different border side
+   each time, so every direction it can end up in has to be covered */
+.pinPopup.mapboxgl-popup-anchor-top .mapboxgl-popup-tip,
+.pinPopup.mapboxgl-popup-anchor-top-left .mapboxgl-popup-tip,
+.pinPopup.mapboxgl-popup-anchor-top-right .mapboxgl-popup-tip {
+    border-bottom-color: var(--card-bg);
+}
+
+.pinPopup.mapboxgl-popup-anchor-bottom .mapboxgl-popup-tip,
+.pinPopup.mapboxgl-popup-anchor-bottom-left .mapboxgl-popup-tip,
+.pinPopup.mapboxgl-popup-anchor-bottom-right .mapboxgl-popup-tip {
+    border-top-color: var(--card-bg);
+}
+
+.pinPopup.mapboxgl-popup-anchor-left .mapboxgl-popup-tip {
+    border-right-color: var(--card-bg);
+}
+
+.pinPopup.mapboxgl-popup-anchor-right .mapboxgl-popup-tip {
+    border-left-color: var(--card-bg);
+}
+
+.pinPopup .mapboxgl-popup-close-button {
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+    padding: 0 0.4rem;
+}
+
+.pinPopupBody {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    /* the extra room on top is for mapbox's close button, which sits over the top right corner */
+    padding: 1.1rem 0.75rem 0.75rem 0.75rem;
+    cursor: pointer;
+    color: var(--text-primary);
+}
+
+/* the heart sits at the end of the row rather than up with the close button, so the two don't overlap */
+.pinPopupBody .saveBtn {
+    align-self: center;
+    margin-left: 0.25rem;
+    flex-shrink: 0;
+}
+
+.pinPopupBody img {
+    width: 54px;
+    height: 36px;
+    object-fit: cover;
+    border-radius: 3px;
+    flex-shrink: 0;
+}
+
+.pinPopupBody h3 {
+    margin: 0;
+    font-size: 0.95rem;
+}
+
+.pinPopupBody p {
+    margin: 0.1rem 0 0 0;
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+}
+
+.pinPopupBody span {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: #7672ce;
+}
+
+/* matches the breakpoint index.css already uses for the page padding */
+@media (max-width: 600px) {
+    .worldMap {
+        height: 300px;
+        margin-bottom: 2rem;
+    }
+}

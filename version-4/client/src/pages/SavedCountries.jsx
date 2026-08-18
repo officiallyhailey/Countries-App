@@ -1,11 +1,14 @@
-import { useState, useEffect } from "react";
-import CountryCard from "../components/CountryCard";
+import { useState, useEffect, lazy, Suspense } from "react";
 import ProfileForm from "../components/ProfileForm";
 import Loading from "../components/Loading";
 import "./SavedCountries.css";
 
-// saved page: the countries you've hearted, plus the profile form. the database only stores names, so this page matches those names against the full list from App to get the flags and the rest of the info
-function SavedCountries({ countries }) {
+// mapbox is a big library and this is the only page that uses it, so it's only fetched when this page
+// opens. otherwise the home and detail pages would download it too, for a map they never show
+const WorldMap = lazy(() => import("../components/WorldMap"));
+
+// saved page: the countries you've hearted shown as pins on the map, plus the profile form. the database only stores names, so this page matches those names against the full list from App to get the flags and the rest of the info
+function SavedCountries({ countries, isDarkMode }) {
     const [savedCountries, setSavedCountries] = useState([]);
     const [loading, setLoading] = useState(true);
 
@@ -43,13 +46,19 @@ function SavedCountries({ countries }) {
                     No saved countries yet. Open a country and click ♡ Save to add it here!
                 </p>
             ) : (
-                // onUnsave takes the card off this list straight away, so unhearting something makes it disappear without needing to fetch again
-                <CountryCard
-                    countries={savedCountries}
-                    onUnsave={(name) =>
-                        setSavedCountries((prev) => prev.filter((c) => c.name !== name))
-                    }
-                />
+                // the fallback holds the same height the map will take, so the profile form below doesn't
+                // jump up the page while the map is still being fetched
+                <Suspense fallback={<div className="mapPlaceholder" />}>
+                    {/* onUnsave takes the country off this list, which drops its pin straight away instead
+                        of waiting on another fetch */}
+                    <WorldMap
+                        countries={savedCountries}
+                        isDarkMode={isDarkMode}
+                        onUnsave={(name) =>
+                            setSavedCountries((prev) => prev.filter((c) => c.name !== name))
+                        }
+                    />
+                </Suspense>
             )}
 
             <ProfileForm />
